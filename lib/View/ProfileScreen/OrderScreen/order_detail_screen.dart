@@ -6,7 +6,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 class OrderDetailScreen extends StatelessWidget {
-  const OrderDetailScreen({super.key, required this.productList});
+  const OrderDetailScreen({
+    super.key,
+    required this.productList,
+  });
 
   final List<ProductEntity> productList;
   @override
@@ -24,11 +27,19 @@ class OrderDetailScreen extends StatelessWidget {
         children: [
           Container(
             height: Get.height * 0.8,
-            margin:
-                const EdgeInsets.only(top: 12, right: 15, bottom: 12, left: 15),
+            margin: const EdgeInsets.only(
+              top: 12,
+              right: 15,
+              bottom: 12,
+              left: 15,
+            ),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: colors.gray, borderRadius: BorderRadius.circular(15)),
+              color: colors.gray,
+              borderRadius: BorderRadius.circular(
+                15,
+              ),
+            ),
             child: AlignedGridView.count(
               physics: duplicateController.uiDuplicate.defaultScroll,
               crossAxisCount: 2,
@@ -40,14 +51,23 @@ class OrderDetailScreen extends StatelessWidget {
                 return Container(
                   height: 250,
                   decoration: BoxDecoration(
-                      color: colors.whiteColor,
-                      borderRadius: BorderRadius.circular(15)),
+                    color: colors.whiteColor,
+                    borderRadius: BorderRadius.circular(
+                      15,
+                    ),
+                  ),
                   child: Column(
                     children: [
                       Container(
-                          margin: const EdgeInsets.only(top: 10, bottom: 10),
-                          width: 130,
-                          child: networkImage(imageUrl: product.imageUrl)),
+                        margin: const EdgeInsets.only(
+                          top: 10,
+                          bottom: 10,
+                        ),
+                        width: 130,
+                        child: networkImage(
+                          imageUrl: product.imageUrl,
+                        ),
+                      ),
                       Column(
                         children: [
                           Text(

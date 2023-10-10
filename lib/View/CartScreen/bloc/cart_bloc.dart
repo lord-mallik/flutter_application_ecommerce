@@ -12,23 +12,36 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   final duplicateController = Get.find<DuplicateController>();
   late CartFunctions cartFunctions = duplicateController.cartFunctions;
+
   CartBloc() : super(CartInitial()) {
     on<CartEvent>((event, emit) async {
       try {
         if (event is CartStart) {
-          emit(CartLoading());
+          emit(
+            CartLoading(),
+          );
           final productList = await cartFunctions.getProductFromHive();
-          final String totalPrice =
-              cartFunctions.calculateTotalPrice(productList: productList);
+          final String totalPrice = cartFunctions.calculateTotalPrice(
+            productList: productList,
+          );
           emit(CartLoading());
           if (productList.isNotEmpty) {
-            emit(CartSuccess(productList: productList, totalPrice: totalPrice));
+            emit(
+              CartSuccess(
+                productList: productList,
+                totalPrice: totalPrice,
+              ),
+            );
           } else {
-            emit(CartEmpty());
+            emit(
+              CartEmpty(),
+            );
           }
         }
       } catch (e) {
-        emit(CartError());
+        emit(
+          CartError(),
+        );
       }
     });
   }

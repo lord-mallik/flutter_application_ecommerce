@@ -20,42 +20,72 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         if (event is AddressStart) {
           emit(AddressLoading());
           final addressList = await addressFunctions.getAddressList();
-          final countryItemList =
-              await addressFunctions.countryMenuList(textStyle: textStyle);
+          final countryItemList = await addressFunctions.countryMenuList(
+            textStyle: textStyle,
+          );
           if (addressList.isNotEmpty) {
-            emit(AddressDefaultScreen(
-                addressList: addressList, countryItemList: countryItemList));
+            emit(
+              AddressDefaultScreen(
+                addressList: addressList,
+                countryItemList: countryItemList,
+              ),
+            );
           } else {
-            emit(AddressEmpty(countryItemList));
+            emit(
+              AddressEmpty(
+                countryItemList,
+              ),
+            );
           }
         } else if (event is AddressRemove) {
-          emit(AddressLoading());
+          emit(
+            AddressLoading(),
+          );
           final isCompleted = await addressFunctions.removeAddress(
-              postalCode: event.postalCode);
+            postalCode: event.postalCode,
+          );
           if (isCompleted) {
             final addressList = await addressFunctions.getAddressList();
-            final countryItemList =
-                await addressFunctions.countryMenuList(textStyle: textStyle);
+            final countryItemList = await addressFunctions.countryMenuList(
+              textStyle: textStyle,
+            );
             if (addressList.isNotEmpty) {
-              emit(AddressDefaultScreen(
-                  addressList: addressList, countryItemList: countryItemList));
+              emit(
+                AddressDefaultScreen(
+                  addressList: addressList,
+                  countryItemList: countryItemList,
+                ),
+              );
             } else {
-              emit(AddressEmpty(countryItemList));
+              emit(
+                AddressEmpty(
+                  countryItemList,
+                ),
+              );
             }
           } else {
-            emit(AddressError());
+            emit(
+              AddressError(),
+            );
           }
         } else if (event is AddressEdit) {
           emit(AddressLoading());
           bool isCompleted = await addressFunctions.editAddress(
-              addressEntity: event.addressEntity, postalCode: event.postalCode);
+            addressEntity: event.addressEntity,
+            postalCode: event.postalCode,
+          );
           if (isCompleted) {
             final addressList = await addressFunctions.getAddressList();
-            final countryItemList =
-                await addressFunctions.countryMenuList(textStyle: textStyle);
+            final countryItemList = await addressFunctions.countryMenuList(
+              textStyle: textStyle,
+            );
             emit(AddressEditedSuccessfully());
-            emit(AddressDefaultScreen(
-                addressList: addressList, countryItemList: countryItemList));
+            emit(
+              AddressDefaultScreen(
+                addressList: addressList,
+                countryItemList: countryItemList,
+              ),
+            );
           } else {
             emit(AddressError());
           }
@@ -64,10 +94,15 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           await addressFunctions.addToAddressBox(
               addressEntity: event.addressEntity);
           final addressList = await addressFunctions.getAddressList();
-          final countryItemList =
-              await addressFunctions.countryMenuList(textStyle: textStyle);
-          emit(AddressDefaultScreen(
-              addressList: addressList, countryItemList: countryItemList));
+          final countryItemList = await addressFunctions.countryMenuList(
+            textStyle: textStyle,
+          );
+          emit(
+            AddressDefaultScreen(
+              addressList: addressList,
+              countryItemList: countryItemList,
+            ),
+          );
         }
       } catch (e) {
         emit(AddressError());

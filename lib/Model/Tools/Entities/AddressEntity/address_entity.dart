@@ -20,5 +20,5 @@ class AddressEntity {
       required this.country,
       required this.state,
       required this.addressDetail,
-      required this.postalCode});
+      required this.postalCode,});
 }

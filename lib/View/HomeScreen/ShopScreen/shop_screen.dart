@@ -28,7 +28,9 @@ class ShopScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           title,
-          style: textStyle.titleLarge.copyWith(color: colors.whiteColor),
+          style: textStyle.titleLarge.copyWith(
+            color: colors.whiteColor,
+          ),
         ),
       ),
       backgroundColor: colors.blackColor,

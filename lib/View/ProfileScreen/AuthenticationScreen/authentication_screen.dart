@@ -75,19 +75,27 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     contentPadding: EdgeInsets.zero,
                     titlePadding: EdgeInsets.zero,
                     shape: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(15)),
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(
+                        15,
+                      ),
+                    ),
                     title: Container(
                       alignment: Alignment.center,
                       height: 50,
                       decoration: BoxDecoration(
-                          color: colors.blackColor,
-                          borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(15))),
+                        color: colors.blackColor,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(
+                            15,
+                          ),
+                        ),
+                      ),
                       child: Text(
                         "Change password",
-                        style: textStyle.titleLarge
-                            .copyWith(color: colors.whiteColor),
+                        style: textStyle.titleLarge.copyWith(
+                          color: colors.whiteColor,
+                        ),
                       ),
                     ),
                     content: Container(
@@ -95,25 +103,33 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                       child: duplicateContainer(
                         colors: colors,
                         child: Container(
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(
+                            15,
+                          ),
                           width: Get.mediaQuery.size.width * 0.8,
                           height: Get.mediaQuery.size.height * .45,
                           child: Column(
                             children: [
                               textField(
-                                  textStyle: textStyle,
-                                  controller: userNameController,
-                                  formKey: userNameKey,
-                                  lable: "user name",
-                                  colors: colors,
-                                  edgeInsetsGeometry: const EdgeInsets.all(5)),
+                                textStyle: textStyle,
+                                controller: userNameController,
+                                formKey: userNameKey,
+                                lable: "user name",
+                                colors: colors,
+                                edgeInsetsGeometry: const EdgeInsets.all(
+                                  5,
+                                ),
+                              ),
                               textField(
-                                  textStyle: textStyle,
-                                  controller: passwordController,
-                                  formKey: passwordKey,
-                                  lable: "Password",
-                                  colors: colors,
-                                  edgeInsetsGeometry: const EdgeInsets.all(5)),
+                                textStyle: textStyle,
+                                controller: passwordController,
+                                formKey: passwordKey,
+                                lable: "Password",
+                                colors: colors,
+                                edgeInsetsGeometry: const EdgeInsets.all(
+                                  5,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -122,10 +138,13 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     actions: [
                       Container(
                         alignment: Alignment.center,
-                        margin: const EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(
+                          bottom: 20,
+                        ),
                         child: CupertinoTheme(
-                          data:
-                              CupertinoThemeData(primaryColor: colors.primary),
+                          data: CupertinoThemeData(
+                            primaryColor: colors.primary,
+                          ),
                           child: CupertinoButton.filled(
                             child: Text(
                               "Save",
@@ -135,9 +154,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                               if (userNameKey.currentState!.validate() &&
                                   passwordKey.currentState!.validate()) {
                                 authenticationBloc!.add(
-                                    AuthenticationSaveChanges(
-                                        userName: userNameController.text,
-                                        password: passwordController.text));
+                                  AuthenticationSaveChanges(
+                                    userName: userNameController.text,
+                                    password: passwordController.text,
+                                  ),
+                                );
                                 Navigator.pop(context);
                               }
                             },
@@ -175,7 +196,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             final CustomColors colors = duplicateController.colors;
             final CustomTextStyle textStyle = duplicateController.textStyle;
 
-            const EdgeInsetsGeometry edgeInsets = EdgeInsets.all(15);
+            const EdgeInsetsGeometry edgeInsets = EdgeInsets.all(
+              15,
+            );
             return DuplicateTemplate(
               colors: colors,
               textStyle: textStyle,
@@ -188,7 +211,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 30, bottom: 20),
+                            padding: const EdgeInsets.only(
+                              top: 30,
+                              bottom: 20,
+                            ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -201,7 +227,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                   height: 5,
                                 ),
                                 AutoSizeText(
-                                  "welcome back, we've been missed you",
+                                  "Welcome back, We've been missed you",
                                   style: textStyle.bodySmall,
                                   maxLines: 1,
                                 )
@@ -220,24 +246,26 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                               lable: "Email"),
                           Obx(
                             () => textField(
-                                suffix: CupertinoButton(
-                                  child: Icon(profileController.obscureText
+                              suffix: CupertinoButton(
+                                child: Icon(
+                                  profileController.obscureText
                                       ? CupertinoIcons.eye
-                                      : CupertinoIcons.eye_slash),
-                                  onPressed: () {
-                                    profileController
-                                            .obscureTextInstance.value =
-                                        !profileController
-                                            .obscureTextInstance.value;
-                                  },
+                                      : CupertinoIcons.eye_slash,
                                 ),
-                                obscureText: profileController.obscureText,
-                                edgeInsetsGeometry: edgeInsets,
-                                colors: colors,
-                                textStyle: textStyle,
-                                controller: passwordController,
-                                formKey: passwordKey,
-                                lable: "Password"),
+                                onPressed: () {
+                                  profileController.obscureTextInstance.value =
+                                      !profileController
+                                          .obscureTextInstance.value;
+                                },
+                              ),
+                              obscureText: profileController.obscureText,
+                              edgeInsetsGeometry: edgeInsets,
+                              colors: colors,
+                              textStyle: textStyle,
+                              controller: passwordController,
+                              formKey: passwordKey,
+                              lable: "Password",
+                            ),
                           ),
                           Padding(
                             padding: edgeInsets,
@@ -272,8 +300,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                     style: textStyle.bodyNormal,
                                   ),
                                   onPressed: () {
-                                    authenticationBloc!
-                                        .add(AuthenticationChangeInformation());
+                                    authenticationBloc!.add(
+                                      AuthenticationChangeInformation(),
+                                    );
                                   },
                                 ),
                               ],
@@ -282,23 +311,30 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                           Padding(
                             padding: edgeInsets,
                             child: CupertinoTheme(
-                                data: CupertinoThemeData(
-                                    primaryColor: colors.primary),
-                                child: CupertinoButton.filled(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Text(
-                                      "Login",
-                                      style: textStyle.bodyNormal
-                                          .copyWith(color: colors.whiteColor),
+                              data: CupertinoThemeData(
+                                primaryColor: colors.primary,
+                              ),
+                              child: CupertinoButton.filled(
+                                  borderRadius: BorderRadius.circular(
+                                    20,
+                                  ),
+                                  child: Text(
+                                    "Login",
+                                    style: textStyle.bodyNormal.copyWith(
+                                      color: colors.whiteColor,
                                     ),
-                                    onPressed: () async {
-                                      authenticationBloc!.add(
-                                          AuthenticationLogin(
-                                              userName: userNameController.text,
-                                              password: passwordController.text,
-                                              isRemember: profileController
-                                                  .rememberMeStatus));
-                                    })),
+                                  ),
+                                  onPressed: () async {
+                                    authenticationBloc!.add(
+                                      AuthenticationLogin(
+                                        userName: userNameController.text,
+                                        password: passwordController.text,
+                                        isRemember:
+                                            profileController.rememberMeStatus,
+                                      ),
+                                    );
+                                  }),
+                            ),
                           ),
                         ],
                       ),
@@ -315,11 +351,14 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                         child: Text(
                           "SignUp",
                           style: textStyle.bodyNormal.copyWith(
-                              fontSize: 19,
-                              decoration: TextDecoration.underline),
+                            fontSize: 19,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                         onPressed: () {
-                          authenticationBloc!.add(AuthenticationSignUpMode());
+                          authenticationBloc!.add(
+                            AuthenticationSignUpMode(),
+                          );
                         },
                       ),
                     ],
@@ -333,7 +372,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             final CustomColors colors = duplicateController.colors;
             final CustomTextStyle textStyle = duplicateController.textStyle;
 
-            const EdgeInsetsGeometry edgeInsets = EdgeInsets.all(15);
+            const EdgeInsetsGeometry edgeInsets = EdgeInsets.all(
+              15,
+            );
             return DuplicateTemplate(
                 colors: colors,
                 textStyle: textStyle,
@@ -346,8 +387,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                         child: Column(
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 30, bottom: 20),
+                              padding: const EdgeInsets.only(
+                                top: 30,
+                                bottom: 20,
+                              ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -363,7 +406,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                     "welcome back, we've been missed you",
                                     style: textStyle.bodySmall,
                                     maxLines: 1,
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -371,39 +414,44 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                               height: 20,
                             ),
                             textField(
-                                edgeInsetsGeometry: edgeInsets,
-                                colors: colors,
-                                textStyle: textStyle,
-                                controller: nameController,
-                                formKey: nameKey,
-                                lable: "Full Name"),
+                              edgeInsetsGeometry: edgeInsets,
+                              colors: colors,
+                              textStyle: textStyle,
+                              controller: nameController,
+                              formKey: nameKey,
+                              lable: "Full Name",
+                            ),
                             textField(
-                                edgeInsetsGeometry: edgeInsets,
-                                colors: colors,
-                                textStyle: textStyle,
-                                controller: userNameController,
-                                formKey: userNameKey,
-                                lable: "Email"),
+                              edgeInsetsGeometry: edgeInsets,
+                              colors: colors,
+                              textStyle: textStyle,
+                              controller: userNameController,
+                              formKey: userNameKey,
+                              lable: "Email",
+                            ),
                             Obx(
                               () => textField(
-                                  suffix: CupertinoButton(
-                                    child: Icon(profileController.obscureText
+                                suffix: CupertinoButton(
+                                  child: Icon(
+                                    profileController.obscureText
                                         ? CupertinoIcons.eye
-                                        : CupertinoIcons.eye_slash),
-                                    onPressed: () {
-                                      profileController
-                                              .obscureTextInstance.value =
-                                          !profileController
-                                              .obscureTextInstance.value;
-                                    },
+                                        : CupertinoIcons.eye_slash,
                                   ),
-                                  obscureText: profileController.obscureText,
-                                  edgeInsetsGeometry: edgeInsets,
-                                  colors: colors,
-                                  textStyle: textStyle,
-                                  controller: passwordController,
-                                  formKey: passwordKey,
-                                  lable: "Password"),
+                                  onPressed: () {
+                                    profileController
+                                            .obscureTextInstance.value =
+                                        !profileController
+                                            .obscureTextInstance.value;
+                                  },
+                                ),
+                                obscureText: profileController.obscureText,
+                                edgeInsetsGeometry: edgeInsets,
+                                colors: colors,
+                                textStyle: textStyle,
+                                controller: passwordController,
+                                formKey: passwordKey,
+                                lable: "Password",
+                              ),
                             ),
                             Padding(
                               padding: edgeInsets,
@@ -426,39 +474,44 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                   Text(
                                     "Remember me",
                                     style: textStyle.bodySmall,
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding: edgeInsets,
                               child: CupertinoTheme(
-                                  data: CupertinoThemeData(
-                                      primaryColor: colors.primary),
-                                  child: CupertinoButton.filled(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Text(
-                                        "SignUp",
-                                        style: textStyle.bodyNormal
-                                            .copyWith(color: colors.whiteColor),
+                                data: CupertinoThemeData(
+                                  primaryColor: colors.primary,
+                                ),
+                                child: CupertinoButton.filled(
+                                    borderRadius: BorderRadius.circular(
+                                      20,
+                                    ),
+                                    child: Text(
+                                      "SignUp",
+                                      style: textStyle.bodyNormal.copyWith(
+                                        color: colors.whiteColor,
                                       ),
-                                      onPressed: () async {
-                                        if (nameKey.currentState!.validate() &&
-                                            userNameKey.currentState!
-                                                .validate() &&
-                                            passwordKey.currentState!
-                                                .validate()) {
-                                          authenticationBloc!.add(
-                                              AuthenticationSignUp(
-                                                  name: nameController.text,
-                                                  userName:
-                                                      userNameController.text,
-                                                  password:
-                                                      passwordController.text,
-                                                  isRemember: profileController
-                                                      .rememberMeStatus));
-                                        }
-                                      })),
+                                    ),
+                                    onPressed: () async {
+                                      if (nameKey.currentState!.validate() &&
+                                          userNameKey.currentState!
+                                              .validate() &&
+                                          passwordKey.currentState!
+                                              .validate()) {
+                                        authenticationBloc!.add(
+                                          AuthenticationSignUp(
+                                            name: nameController.text,
+                                            userName: userNameController.text,
+                                            password: passwordController.text,
+                                            isRemember: profileController
+                                                .rememberMeStatus,
+                                          ),
+                                        );
+                                      }
+                                    }),
+                              ),
                             ),
                           ],
                         ),
@@ -475,11 +528,14 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                           child: Text(
                             "Login",
                             style: textStyle.bodyNormal.copyWith(
-                                fontSize: 19,
-                                decoration: TextDecoration.underline),
+                              fontSize: 19,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                           onPressed: () {
-                            authenticationBloc!.add(AuthenticationLoginMode());
+                            authenticationBloc!.add(
+                              AuthenticationLoginMode(),
+                            );
                           },
                         ),
                       ],
@@ -491,7 +547,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           } else if (state is AuthenticationError) {
             return AppException(
               callback: () {
-                authenticationBloc!.add(AuthenticationStart());
+                authenticationBloc!.add(
+                  AuthenticationStart(),
+                );
               },
             );
           }

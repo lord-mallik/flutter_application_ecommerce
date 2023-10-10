@@ -21,6 +21,7 @@ class ProfileController extends GetxController {
 
   AuthenticationFunctions authenticationFunctionsInstance =
       AuthenticationFunctions();
+
   AuthenticationFunctions get authenticationFunctions =>
       authenticationFunctionsInstance;
 

@@ -10,5 +10,7 @@ class CheckoutGetUserAddress extends CheckoutEvent {}
 class CheckoutSaveAddress extends CheckoutEvent {
   final AddressEntity addressEntity;
 
-  CheckoutSaveAddress(this.addressEntity);
+  CheckoutSaveAddress(
+    this.addressEntity,
+  );
 }

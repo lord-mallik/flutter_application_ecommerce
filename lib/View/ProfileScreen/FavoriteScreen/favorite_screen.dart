@@ -35,7 +35,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return BlocProvider(
       create: (context) {
         final bloc = FavoriteBloc();
-        bloc.add(FavoriteStart());
+        bloc.add(
+          FavoriteStart(),
+        );
         favoriteBloc = bloc;
         return bloc;
       },
@@ -47,40 +49,51 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               colors: colors,
               textStyle: textStyle,
               child: ListView.builder(
-                padding: const EdgeInsets.only(bottom: 40),
+                padding: const EdgeInsets.only(
+                  bottom: 40,
+                ),
                 physics: duplicateController.uiDuplicate.defaultScroll,
                 itemCount: state.productList.length,
                 itemBuilder: (context, index) {
                   final product = state.productList[index];
                   return HorizontalProductView(
-                      colors: colors,
-                      product: product,
-                      textStyle: textStyle,
-                      widget: CupertinoButton(
-                        child: Icon(
-                          Icons.delete,
-                          color: colors.whiteColor,
-                        ),
-                        onPressed: () async {
-                          bool isDeleted = await profileFunctions
-                              .removeFavorite(productEntity: product);
-                          if (isDeleted) {
-                            favoriteBloc!.add(FavoriteStart());
-                          }
-                        },
+                    colors: colors,
+                    product: product,
+                    textStyle: textStyle,
+                    widget: CupertinoButton(
+                      child: Icon(
+                        Icons.delete,
+                        color: colors.whiteColor,
                       ),
-                      margin: const EdgeInsets.only(
-                          top: 15, right: 8, left: 8, bottom: 15));
+                      onPressed: () async {
+                        bool isDeleted = await profileFunctions.removeFavorite(
+                          productEntity: product,
+                        );
+                        if (isDeleted) {
+                          favoriteBloc!.add(
+                            FavoriteStart(),
+                          );
+                        }
+                      },
+                    ),
+                    margin: const EdgeInsets.only(
+                      top: 15,
+                      right: 8,
+                      left: 8,
+                      bottom: 15,
+                    ),
+                  );
                 },
               ),
             );
           } else if (state is FavoriteEmpty) {
             return EmptyScreen(
-                colors: colors,
-                textStyle: textStyle,
-                title: "Favorite Screen",
-                content: "you're favorite list is empty",
-                lottieName: emptyListLottie);
+              colors: colors,
+              textStyle: textStyle,
+              title: "Favorite Screen",
+              content: "you're favorite list is empty",
+              lottieName: emptyListLottie,
+            );
           }
           return Container();
         },

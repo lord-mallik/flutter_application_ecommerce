@@ -46,23 +46,36 @@ class AddressFunctions {
   ];
 
   Future<void> openAddressBox() async {
-    bool isBoxOpen = Hive.isBoxOpen(addressBox);
+    bool isBoxOpen = Hive.isBoxOpen(
+      addressBox,
+    );
     if (!isBoxOpen) {
-      await Hive.openBox<AddressEntity>(addressBox);
+      await Hive.openBox<AddressEntity>(
+        addressBox,
+      );
     }
   }
 
-  Future<void> addToAddressBox({required AddressEntity addressEntity}) async {
+  Future<void> addToAddressBox({
+    required AddressEntity addressEntity,
+  }) async {
     await openAddressBox();
-    final box = Hive.box<AddressEntity>(addressBox);
-    await box.put(addressEntity.postalCode, addressEntity);
+    final box = Hive.box<AddressEntity>(
+      addressBox,
+    );
+    await box.put(
+      addressEntity.postalCode,
+      addressEntity,
+    );
     valueNotifier.value = !valueNotifier.value;
     await box.close();
   }
 
   Future<List<AddressEntity>> getAddressList() async {
     await openAddressBox();
-    final box = Hive.box<AddressEntity>(addressBox);
+    final box = Hive.box<AddressEntity>(
+      addressBox,
+    );
     final List<AddressEntity> addressList = [];
     for (var element in (box.values.toList())) {
       addressList.add(element);
@@ -71,7 +84,9 @@ class AddressFunctions {
     return addressList;
   }
 
-  Future<bool> removeAddress({required int postalCode}) async {
+  Future<bool> removeAddress({
+    required int postalCode,
+  }) async {
     await openAddressBox();
     final box = Hive.box<AddressEntity>(addressBox);
     await box.delete(postalCode);
@@ -117,12 +132,17 @@ class AddressFunctions {
     return popupMenuList;
   }
 
-  Future<bool> editAddress(
-      {required AddressEntity addressEntity, required int postalCode}) async {
+  Future<bool> editAddress({
+    required AddressEntity addressEntity,
+    required int postalCode,
+  }) async {
     await openAddressBox();
     final box = Hive.box<AddressEntity>(addressBox);
     await box.delete(postalCode);
-    await box.put(addressEntity.postalCode, addressEntity);
+    await box.put(
+      addressEntity.postalCode,
+      addressEntity,
+    );
     valueNotifier.value = !valueNotifier.value;
     await box.close();
     return true;

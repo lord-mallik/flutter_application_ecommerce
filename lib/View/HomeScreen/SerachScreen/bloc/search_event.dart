@@ -8,5 +8,7 @@ class InitialSearchScreen extends SearchEvent {}
 class SearchStart extends SearchEvent {
   final String searchKeyWord;
 
-  SearchStart({required this.searchKeyWord});
+  SearchStart({
+    required this.searchKeyWord,
+  });
 }

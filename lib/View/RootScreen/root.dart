@@ -54,7 +54,11 @@ class _RootScreenState extends State<RootScreen> with WidgetsBindingObserver {
       body: PageView(
         physics: duplicateController.uiDuplicate.defaultScroll,
         controller: pageController,
-        children: const [HomeScreen(), CartScreen(), ProfileScreen()],
+        children: const [
+          HomeScreen(),
+          CartScreen(),
+          ProfileScreen(),
+        ],
         onPageChanged: (value) {
           setState(() {
             selectedIndex = value;
@@ -75,7 +79,9 @@ class _RootScreenState extends State<RootScreen> with WidgetsBindingObserver {
               ),
               title: Text(
                 "Home",
-                style: textStyle.bodyNormal.copyWith(color: colors.primary),
+                style: textStyle.bodyNormal.copyWith(
+                  color: colors.primary,
+                ),
               )),
           BottomNavyBarItem(
               activeColor: colors.primary,
@@ -86,23 +92,33 @@ class _RootScreenState extends State<RootScreen> with WidgetsBindingObserver {
               ),
               title: Text(
                 "Cart",
-                style: textStyle.bodyNormal.copyWith(color: colors.primary),
+                style: textStyle.bodyNormal.copyWith(
+                  color: colors.primary,
+                ),
               )),
           BottomNavyBarItem(
               activeColor: colors.primary,
               inactiveColor: colors.blackColor,
               textAlign: TextAlign.center,
-              icon: const Icon(CupertinoIcons.person_alt_circle),
+              icon: const Icon(
+                CupertinoIcons.person_alt_circle,
+              ),
               title: Text(
                 "Profile",
-                style: textStyle.bodyNormal.copyWith(color: colors.primary),
+                style: textStyle.bodyNormal.copyWith(
+                  color: colors.primary,
+                ),
               )),
         ],
         onItemSelected: (value) {
-          setState(() {
-            selectedIndex = value;
-            pageController.jumpToPage(selectedIndex);
-          });
+          setState(
+            () {
+              selectedIndex = value;
+              pageController.jumpToPage(
+                selectedIndex,
+              );
+            },
+          );
         },
       ),
     );

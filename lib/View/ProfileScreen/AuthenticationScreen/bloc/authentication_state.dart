@@ -9,16 +9,20 @@ class AuthenticationLoginScreen extends AuthenticationState {
   final ProfileController profileController;
   final DuplicateController duplicateController;
 
-  AuthenticationLoginScreen(
-      {required this.profileController, required this.duplicateController});
+  AuthenticationLoginScreen({
+    required this.profileController,
+    required this.duplicateController,
+  });
 }
 
 class AuthenticationSignUpScreen extends AuthenticationState {
   final ProfileController profileController;
   final DuplicateController duplicateController;
 
-  AuthenticationSignUpScreen(
-      {required this.profileController, required this.duplicateController});
+  AuthenticationSignUpScreen({
+    required this.profileController,
+    required this.duplicateController,
+  });
 }
 
 class AuthenticationLoading extends AuthenticationState {}

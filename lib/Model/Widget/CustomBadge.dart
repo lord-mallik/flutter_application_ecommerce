@@ -43,7 +43,9 @@ class CustomBadge extends StatelessWidget {
           child: text != null && textStyle != null && textColor != null
               ? Text(
                   text!,
-                  style: textStyle!.copyWith(color: textColor),
+                  style: textStyle!.copyWith(
+                    color: textColor,
+                  ),
                 )
               : Container(),
         ),

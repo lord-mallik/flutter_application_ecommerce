@@ -26,7 +26,10 @@ class AddressEntityAdapter extends TypeAdapter<AddressEntity> {
   }
 
   @override
-  void write(BinaryWriter writer, AddressEntity obj) {
+  void write(
+    BinaryWriter writer,
+    AddressEntity obj,
+  ) {
     writer
       ..writeByte(5)
       ..writeByte(0)

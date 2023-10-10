@@ -17,8 +17,14 @@ class ProductEntity {
   @HiveField(5)
   final String description;
 
-  ProductEntity(this.id, this.name, this.price, this.imageUrl, this.productType,
-      this.description);
+  ProductEntity(
+    this.id,
+    this.name,
+    this.price,
+    this.imageUrl,
+    this.productType,
+    this.description,
+  );
 
   ProductEntity.fromJson(Map<String, dynamic> json)
       : id = json['id'] ?? 0,

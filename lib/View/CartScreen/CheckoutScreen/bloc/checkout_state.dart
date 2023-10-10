@@ -10,10 +10,11 @@ class CheckoutInitialScreen extends CheckoutState {
   final DuplicateController duplicateController;
   final ProfileController profileController;
 
-  CheckoutInitialScreen(
-      {required this.duplicateController,
-      required this.profileController,
-      required this.addressList});
+  CheckoutInitialScreen({
+    required this.duplicateController,
+    required this.profileController,
+    required this.addressList,
+  });
 }
 
 class CheckoutGetAddressScreen extends CheckoutState {
@@ -21,9 +22,11 @@ class CheckoutGetAddressScreen extends CheckoutState {
   final CustomColors colors;
   final CustomTextStyle textStyle;
   final UiDuplicate uiDuplicate;
-  CheckoutGetAddressScreen(
-      {required this.popupMenuItemList,
-      required this.colors,
-      required this.uiDuplicate,
-      required this.textStyle});
+
+  CheckoutGetAddressScreen({
+    required this.popupMenuItemList,
+    required this.colors,
+    required this.uiDuplicate,
+    required this.textStyle,
+  });
 }

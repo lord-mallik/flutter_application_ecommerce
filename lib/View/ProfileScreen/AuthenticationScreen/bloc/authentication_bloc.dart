@@ -23,29 +23,45 @@ class AuthenticationBloc
           emit(AuthenticationLoading());
           final previousAccount = profileFunctions.getUserInformation();
           if (previousAccount != null) {
-            emit(AuthenticationLoginScreen(
+            emit(
+              AuthenticationLoginScreen(
                 profileController: profileController,
-                duplicateController: duplicateController));
+                duplicateController: duplicateController,
+              ),
+            );
           } else {
-            emit(AuthenticationSignUpScreen(
+            emit(
+              AuthenticationSignUpScreen(
                 profileController: profileController,
-                duplicateController: duplicateController));
+                duplicateController: duplicateController,
+              ),
+            );
           }
         } else if (event is AuthenticationSignUpMode) {
-          emit(AuthenticationLoading());
-          emit(AuthenticationSignUpScreen(
+          emit(
+            AuthenticationLoading(),
+          );
+          emit(
+            AuthenticationSignUpScreen(
               profileController: profileController,
-              duplicateController: duplicateController));
+              duplicateController: duplicateController,
+            ),
+          );
         } else if (event is AuthenticationLoginMode) {
           emit(AuthenticationLoading());
-          emit(AuthenticationLoginScreen(
+          emit(
+            AuthenticationLoginScreen(
               profileController: profileController,
-              duplicateController: duplicateController));
+              duplicateController: duplicateController,
+            ),
+          );
         } else if (event is AuthenticationLogin) {
           emit(AuthenticationLoading());
           final previousAccount = profileFunctions.getUserInformation();
           if (previousAccount != null) {
-            await profileFunctions.saveRemember(remember: event.isRemember);
+            await profileFunctions.saveRemember(
+              remember: event.isRemember,
+            );
             bool isLogin = profileFunctions.loginUser(
                 pI: previousAccount,
                 i: UserInformation(
@@ -56,48 +72,68 @@ class AuthenticationBloc
               emit(LoginSuccess());
             } else {
               emit(LoginUnSuccess());
-              emit(AuthenticationLoginScreen(
+              emit(
+                AuthenticationLoginScreen(
                   profileController: profileController,
-                  duplicateController: duplicateController));
+                  duplicateController: duplicateController,
+                ),
+              );
             }
           } else {
             emit(UserHaveNoAccount());
-            emit(AuthenticationLoginScreen(
+            emit(
+              AuthenticationLoginScreen(
                 profileController: profileController,
-                duplicateController: duplicateController));
+                duplicateController: duplicateController,
+              ),
+            );
           }
         } else if (event is AuthenticationSignUp) {
           emit(AuthenticationLoading());
 
           await profileFunctions.saveRemember(remember: event.isRemember);
           final isSign = await profileFunctions.signUser(
-              information: UserInformation(
-                  userName: event.userName,
-                  password: event.password,
-                  name: event.name));
+            information: UserInformation(
+              userName: event.userName,
+              password: event.password,
+              name: event.name,
+            ),
+          );
           if (isSign) {
-            emit(SignSuccess());
+            emit(
+              SignSuccess(),
+            );
           }
         } else if (event is AuthenticationChangeInformation) {
           emit(ChangeInformation());
-          emit(AuthenticationLoginScreen(
+          emit(
+            AuthenticationLoginScreen(
               profileController: profileController,
-              duplicateController: duplicateController));
+              duplicateController: duplicateController,
+            ),
+          );
         } else if (event is AuthenticationSaveChanges) {
           emit(AuthenticationLoading());
           final bool isCompleted = await profileFunctions.updateUserInformation(
-              i: UserInformation(
-                  userName: event.userName,
-                  password: event.password,
-                  name: ""));
+            i: UserInformation(
+              userName: event.userName,
+              password: event.password,
+              name: "",
+            ),
+          );
           if (isCompleted) {
-            emit(AuthenticationLoginScreen(
+            emit(
+              AuthenticationLoginScreen(
                 profileController: profileController,
-                duplicateController: duplicateController));
+                duplicateController: duplicateController,
+              ),
+            );
           }
         }
       } catch (e) {
-        emit(AuthenticationError());
+        emit(
+          AuthenticationError(),
+        );
       }
     });
   }

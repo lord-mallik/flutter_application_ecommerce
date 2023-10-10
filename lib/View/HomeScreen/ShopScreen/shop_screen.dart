@@ -10,6 +10,7 @@ class ShopScreen extends StatelessWidget {
     required this.title,
     required this.productList,
   });
+
   final String title;
   final List<ProductEntity> productList;
 
@@ -34,10 +35,11 @@ class ShopScreen extends StatelessWidget {
       body: gridViewScreensContainer(
         colors: colors,
         child: ProductGrideView(
-            productList: productList,
-            uiDuplicate: uiDuplicate,
-            colors: colors,
-            textStyle: textStyle),
+          productList: productList,
+          uiDuplicate: uiDuplicate,
+          colors: colors,
+          textStyle: textStyle,
+        ),
       ),
     );
   }

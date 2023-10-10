@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +21,7 @@ import 'CustomBadge.dart';
 
 class AppException extends StatelessWidget {
   const AppException({super.key, this.callback, this.errorMessage});
+
   final GestureTapCallback? callback;
   final String? errorMessage;
 
@@ -106,6 +106,7 @@ class HomeProductView extends StatelessWidget {
   final CustomTextStyle textStyle;
   final CustomColors colors;
   final ProfileFunctions profileFunctions;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -116,46 +117,44 @@ class HomeProductView extends StatelessWidget {
             Get.to(DetailScreen(productEntity: product));
           },
           child: CustomBadge(
-            badgeColor: colors.blackColor,
-            textColor: colors.whiteColor,
+            badgeColor: colors.amber,
+            textColor: colors.amber,
             text: 'Favorite',
             textStyle: textStyle.bodyNormal,
             onPress: () {
               Get.to(DetailScreen(productEntity: product));
             },
-            icon: Icons.favorite, // Change to your desired icon
+            icon: Icons.favorite,
             iconColor: Colors.white,
             child: Column(
               children: [
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: networkImage(imageUrl: product.imageUrl),
-                ),
                 const SizedBox(
                   height: 5,
+                ),
+                SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: networkImage(imageUrl: product.imageUrl),
                 ),
                 Text(
                   product.name.split("Maybelline").last.substring(0, 7),
-                  style: textStyle.bodyNormal,
+                  style: textStyle.bodySmall,
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
-                  "€${product.price}",
-                  style: textStyle.bodyNormal,
+                  "₹${product.price}",
+                  style: textStyle.bodySmall,
                 ),
               ],
             ), // Change to your desired color
           ),
-
         );
       },
     );
   }
 }
-
 
 class FavoriteBadge extends StatefulWidget {
   const FavoriteBadge(
@@ -164,10 +163,12 @@ class FavoriteBadge extends StatefulWidget {
       required this.badgeBackgroundColor,
       required this.activeColor,
       required this.inActive});
+
   final ProductEntity product;
   final Color badgeBackgroundColor;
   final Color activeColor;
   final Color inActive;
+
   @override
   State<FavoriteBadge> createState() => _FavoriteBadgeState();
 }
@@ -217,11 +218,13 @@ class ShopProductView extends StatelessWidget {
     required this.product,
     required this.textStyle,
     required this.colors,
+    this.text,
   }) : super(key: key);
 
   final ProductEntity product;
   final CustomTextStyle textStyle;
   final CustomColors colors;
+  final Text? text;
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +253,7 @@ class ShopProductView extends StatelessWidget {
               width: 100,
               height: 100,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 child: networkImage(imageUrl: product.imageUrl),
               ),
             ),
@@ -258,15 +261,15 @@ class ShopProductView extends StatelessWidget {
               height: 5,
             ),
             Text(
-              product.name.split("Maybelline").last.substring(0, 7),
-              style: textStyle.bodyNormal.copyWith(color: colors.whiteColor),
+              product.productType,
+              style: textStyle.bodyNormal.copyWith(color: colors.blackColor),
             ),
             const SizedBox(
               height: 5,
             ),
             Text(
-              "€${product.price}",
-              style: textStyle.bodyNormal.copyWith(color: colors.whiteColor),
+              "₹${product.price}",
+              style: textStyle.bodyNormal.copyWith(color: colors.blackColor),
             ),
           ],
         ),
@@ -274,7 +277,6 @@ class ShopProductView extends StatelessWidget {
     );
   }
 }
-
 
 class CartLengthBadge extends StatelessWidget {
   const CartLengthBadge({
@@ -314,7 +316,6 @@ class CartLengthBadge extends StatelessWidget {
   }
 }
 
-
 class HorizontalProductView extends StatelessWidget {
   const HorizontalProductView({
     Key? key,
@@ -330,6 +331,7 @@ class HorizontalProductView extends StatelessWidget {
   final CustomTextStyle textStyle;
   final Widget widget;
   final EdgeInsetsGeometry margin;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -384,7 +386,7 @@ class HorizontalProductView extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            "€${product.price}",
+                            "₹${product.price}",
                             style: textStyle.bodyNormal.copyWith(
                                 color: colors.whiteColor,
                                 fontWeight: FontWeight.bold),
@@ -419,6 +421,7 @@ class CartBottomItem extends StatelessWidget {
   final GestureTapCallback callback;
   final Widget? widget;
   final String navigateName;
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -497,14 +500,17 @@ class ProductListView extends StatelessWidget {
       required this.reverse,
       required this.callback,
       required this.profileFunctions});
+
   final CustomColors colors;
   final CustomTextStyle textStyle;
   final List<ProductEntity> productList;
+
   final String title;
   final ScrollPhysics physics;
   final bool reverse;
   final GestureTapCallback callback;
   final ProfileFunctions profileFunctions;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -575,10 +581,12 @@ class BannerListView extends StatelessWidget {
       required this.colors,
       required this.textStyle,
       required this.callback});
+
   final List<ProductEntity> produtList;
   final CustomColors colors;
   final CustomTextStyle textStyle;
   final GestureTapCallback callback;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -643,6 +651,7 @@ class ProductGrideView extends StatelessWidget {
   }) : super(key: key);
 
   final List<ProductEntity> productList;
+
   final UiDuplicate uiDuplicate;
   final CustomColors colors;
   final CustomTextStyle textStyle;
@@ -704,6 +713,7 @@ class EmptyScreen extends StatelessWidget {
   final String title;
   final String content;
   final String lottieName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -757,6 +767,7 @@ class DuplicateTemplate extends StatelessWidget {
   final CustomTextStyle textStyle;
   final Widget child;
   final String title;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -785,7 +796,8 @@ Widget textField(
     required CustomColors colors,
     required EdgeInsetsGeometry edgeInsetsGeometry,
     TextInputType inputType = TextInputType.emailAddress,
-    bool obscureText = false,Widget? suffix}) {
+    bool obscureText = false,
+    Widget? suffix}) {
   return Padding(
       padding: edgeInsetsGeometry,
       child: Theme(

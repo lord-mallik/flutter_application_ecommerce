@@ -1,4 +1,4 @@
-#Mon Oct 09 16:50:39 IST 2023
+#Tue Oct 10 16:09:48 IST 2023
 base.0=/Users/nikhilmallik/Documents/Nikhil/Flutter/New/flutter_application_ecommerce/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

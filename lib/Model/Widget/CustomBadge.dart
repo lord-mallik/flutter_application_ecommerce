@@ -34,6 +34,7 @@ class CustomBadge extends StatelessWidget {
     return Stack(
       children: [
         Container(
+
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -41,9 +42,9 @@ class CustomBadge extends StatelessWidget {
           ),
           child: text != null && textStyle != null && textColor != null
               ? Text(
-            text!,
-            style: textStyle!.copyWith(color: textColor),
-          )
+                  text!,
+                  style: textStyle!.copyWith(color: textColor),
+                )
               : Container(),
         ),
         Positioned.fill(child: child!),

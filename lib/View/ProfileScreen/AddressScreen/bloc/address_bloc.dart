@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 part 'address_event.dart';
+
 part 'address_state.dart';
 
 class AddressBloc extends Bloc<AddressEvent, AddressState> {

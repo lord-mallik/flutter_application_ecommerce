@@ -121,7 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   textStyle: textStyle,
                   title: "Search Result",
                   content: "Nothing found",
-                  lottieName: emtySearchLottie);
+                  lottieName: emptySearchLottie);
             } else if (state is SearchLoading) {
               return const CustomLoading();
             } else if (state is SearchError) {

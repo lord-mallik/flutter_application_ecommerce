@@ -293,7 +293,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                     ),
                                     onPressed: () async {
                                       authenticationBloc!.add(
-                                          AuthenticatioLogin(
+                                          AuthenticationLogin(
                                               userName: userNameController.text,
                                               password: passwordController.text,
                                               isRemember: profileController

@@ -4,6 +4,7 @@ import 'package:flutter_application_ecommerce/ViewModel/Home/HomeRepository/home
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'search_event.dart';
+
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {

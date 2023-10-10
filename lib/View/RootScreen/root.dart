@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key, required this.index});
+
   final int index;
   @override
   State<RootScreen> createState() => _RootScreenState();
@@ -22,9 +23,9 @@ class _RootScreenState extends State<RootScreen> with WidgetsBindingObserver {
   final initialController = Get.find<InitialController>();
   late CustomColors colors = duplicateController.colors;
   late CustomTextStyle textStyle = duplicateController.textStyle;
-  late int slectedIndex = widget.index;
+  late int selectedIndex = widget.index;
   late PageController pageController =
-      PageController(initialPage: slectedIndex, keepPage: true);
+      PageController(initialPage: selectedIndex, keepPage: true);
   @override
   void initState() {
     super.initState();
@@ -56,14 +57,14 @@ class _RootScreenState extends State<RootScreen> with WidgetsBindingObserver {
         children: const [HomeScreen(), CartScreen(), ProfileScreen()],
         onPageChanged: (value) {
           setState(() {
-            slectedIndex = value;
+            selectedIndex = value;
           });
         },
       ),
       bottomNavigationBar: BottomNavyBar(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         curve: Curves.easeInOut,
-        selectedIndex: slectedIndex,
+        selectedIndex: selectedIndex,
         items: [
           BottomNavyBarItem(
               activeColor: colors.primary,
@@ -99,8 +100,8 @@ class _RootScreenState extends State<RootScreen> with WidgetsBindingObserver {
         ],
         onItemSelected: (value) {
           setState(() {
-            slectedIndex = value;
-            pageController.jumpToPage(slectedIndex);
+            selectedIndex = value;
+            pageController.jumpToPage(selectedIndex);
           });
         },
       ),

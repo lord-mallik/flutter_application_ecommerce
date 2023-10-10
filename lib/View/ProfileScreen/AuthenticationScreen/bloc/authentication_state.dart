@@ -25,12 +25,12 @@ class AuthenticationLoading extends AuthenticationState {}
 
 class AuthenticationError extends AuthenticationState {}
 
-class LoginSuccess extends AuthenticationState{}
+class LoginSuccess extends AuthenticationState {}
 
-class UserHaveNoAccount extends AuthenticationState{}
+class UserHaveNoAccount extends AuthenticationState {}
 
-class SignSuccess extends AuthenticationState{}
+class SignSuccess extends AuthenticationState {}
 
-class LoginUnSuccess extends AuthenticationState{}
+class LoginUnSuccess extends AuthenticationState {}
 
-class ChangeInformation extends AuthenticationState{}
+class ChangeInformation extends AuthenticationState {}

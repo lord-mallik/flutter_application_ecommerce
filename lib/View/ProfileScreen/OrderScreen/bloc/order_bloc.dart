@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 part 'order_event.dart';
+
 part 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {

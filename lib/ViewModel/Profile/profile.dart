@@ -9,12 +9,12 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileFunctions {
-  final String imageStorge = "ImageSotrge";
+  final String imageStorage = "ImageStorage";
   final GetStorage storage = GetStorage();
   final String favoriteBox = "Favorite Box";
 
-  Future<bool> saveImageInSotrge({required String path}) async {
-    await storage.write(imageStorge, path);
+  Future<bool> saveImageInStorage({required String path}) async {
+    await storage.write(imageStorage, path);
     return true;
   }
 
@@ -23,15 +23,15 @@ class ProfileFunctions {
     final XFile? xFile = await picker.pickImage(source: ImageSource.gallery);
     final ProfileController profileController = Get.find<ProfileController>();
     if (xFile != null) {
-      bool isSved = await saveImageInSotrge(path: xFile.path);
-      profileController.userSetImageInstance.value = isSved;
-      return isSved;
+      bool isSaved = await saveImageInStorage(path: xFile.path);
+      profileController.userSetImageInstance.value = isSaved;
+      return isSaved;
     }
     return false;
   }
 
   File? imageFile() {
-    String? imagePath = storage.read(imageStorge);
+    String? imagePath = storage.read(imageStorage);
     if (imagePath != null) {
       return File(imagePath);
     } else {

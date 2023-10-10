@@ -17,6 +17,7 @@ class PaymentScreen extends StatelessWidget {
       required this.totalPrice,
       required this.productList,
       required this.addressDetail});
+
   final String totalPrice;
   final List<ProductEntity> productList;
   final String addressDetail;
@@ -64,11 +65,11 @@ class PaymentScreen extends StatelessWidget {
                                   time: dateTime,
                                   totalPrice: totalPrice,
                                   productList: productList));
-                          bool isCommpleated = await duplicateController
+                          bool isCompleted = await duplicateController
                               .cartFunctions
                               .clearCartBox();
 
-                          if (isCommpleated) {
+                          if (isCompleted) {
                             Get.offAll(const RootScreen(
                               index: 1,
                             ));

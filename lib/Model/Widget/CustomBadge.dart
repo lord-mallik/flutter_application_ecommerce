@@ -14,7 +14,8 @@ class CustomBadge extends StatelessWidget {
   final Color? activeColor;
   final Color? inActive;
 
-  CustomBadge({
+  const CustomBadge({
+    super.key,
     this.badgeColor,
     this.textColor,
     this.text,
@@ -34,7 +35,6 @@ class CustomBadge extends StatelessWidget {
     return Stack(
       children: [
         Container(
-
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,

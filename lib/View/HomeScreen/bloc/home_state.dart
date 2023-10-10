@@ -10,10 +10,7 @@ class HomeLoading extends HomeState {}
 class HomeSuccess extends HomeState {
   final List<ProductEntity> productList;
 
-
   HomeSuccess({required this.productList});
-
 }
 
-class HomeError extends HomeState {
-}
+class HomeError extends HomeState {}

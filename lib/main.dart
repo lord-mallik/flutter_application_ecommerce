@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_ecommerce/Model/GetX/Binding/initial_binding.dart';
 import 'package:flutter_application_ecommerce/Model/GetX/Controller/duplicate_controller.dart';
-import 'package:flutter_application_ecommerce/View/RootScreen/root.dart';
 import 'package:flutter_application_ecommerce/View/IntroScreen/intro_screen.dart';
+import 'package:flutter_application_ecommerce/View/RootScreen/root.dart';
 import 'package:flutter_application_ecommerce/ViewModel/Initial/initial.dart';
 import 'package:get/get.dart';
 
@@ -18,9 +18,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     bool isFirst =
-    Get.find<DuplicateController>().introFunctions.getLaunchStatus();
+        Get.find<DuplicateController>().introFunctions.getLaunchStatus();
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       title: 'E-commerce X',
@@ -28,10 +27,8 @@ class MyApp extends StatelessWidget {
       home: isFirst
           ? const IntroScreen()
           : const RootScreen(
-        index: 0,
-      ),
+              index: 0,
+            ),
     );
   }
 }
-
-

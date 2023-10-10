@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 part 'checkout_event.dart';
+
 part 'checkout_state.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
@@ -28,8 +29,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       } else if (event is CheckoutGetUserAddress) {
         final popupMenuItemList = await addressFunctions.countryMenuList(
             textStyle: duplicateController.textStyle);
-        emit(CheckoutGetAddreesScreen(
-          uiDuplicate: duplicateController.uiDuplicate,
+        emit(CheckoutGetAddressScreen(
+            uiDuplicate: duplicateController.uiDuplicate,
             popupMenuItemList: popupMenuItemList,
             textStyle: duplicateController.textStyle,
             colors: duplicateController.colors));

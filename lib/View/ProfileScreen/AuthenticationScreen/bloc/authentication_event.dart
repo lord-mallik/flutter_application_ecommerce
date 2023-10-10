@@ -5,12 +5,12 @@ abstract class AuthenticationEvent {}
 
 class AuthenticationStart extends AuthenticationEvent {}
 
-class AuthenticatioLogin extends AuthenticationEvent {
+class AuthenticationLogin extends AuthenticationEvent {
   final String userName;
   final String password;
   final bool isRemember;
 
-  AuthenticatioLogin(
+  AuthenticationLogin(
       {required this.userName,
       required this.password,
       required this.isRemember});

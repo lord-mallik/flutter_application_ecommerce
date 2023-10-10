@@ -3,14 +3,15 @@ import 'package:flutter_application_ecommerce/Model/Tools/JsonParse/product_pars
 
 abstract class HomeDataSource {
   Future<List<ProductEntity>> getProducts();
-  Future<List<ProductEntity>> getProductsWithKeyWord(
-      {required String keyWord});
+
+  Future<List<ProductEntity>> getProductsWithKeyWord({required String keyWord});
 }
 
 class HomeRemoteDataSource implements HomeDataSource {
   final Dio httpClient;
 
   HomeRemoteDataSource({required this.httpClient});
+
   @override
   Future<List<ProductEntity>> getProducts() async {
     final response = await httpClient.get(
@@ -28,7 +29,7 @@ class HomeRemoteDataSource implements HomeDataSource {
     final response = await httpClient.get(
         "https://makeup-api.herokuapp.com/api/v1/products.json?brand=$keyWord");
     final List<ProductEntity> productList = [];
-    final data=(response.data)as List;
+    final data = (response.data) as List;
     if (data.isNotEmpty) {
       for (var element in data) {
         productList.add(ProductEntity.fromJson(element));

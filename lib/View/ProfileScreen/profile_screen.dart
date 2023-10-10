@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_ecommerce/Model/GetX/Controller/duplicate_controller.dart';
@@ -40,7 +39,8 @@ class ProfileScreen extends StatelessWidget {
                 badgeColor: colors.primary,
                 badgeContent: Container(
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: colors.primary),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: colors.primary),
                   child: SizedBox(
                     width: 30,
                     height: 30,
@@ -48,7 +48,8 @@ class ProfileScreen extends StatelessWidget {
                       child: InkWell(
                         onTap: () async {
                           await profileFunctions.getUserImage();
-                          profileController.userSetImageInstance.update((val) {});
+                          profileController.userSetImageInstance
+                              .update((val) {});
                         },
                         child: Icon(
                           CupertinoIcons.switch_camera,
@@ -59,7 +60,6 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 child: Container(
                   height: 100,
                   width: 100,
@@ -70,7 +70,6 @@ class ProfileScreen extends StatelessWidget {
                   child: profileImage(colors: colors),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 30, bottom: 20),
                 child: Column(

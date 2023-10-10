@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   const OrderDetailScreen({super.key, required this.productList});
+
   final List<ProductEntity> productList;
   @override
   Widget build(BuildContext context) {

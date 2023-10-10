@@ -30,8 +30,6 @@ class _HomeScreenState extends State<HomeScreen>
   final homeController = Get.find<HomeController>();
   final getContext = Get.context!;
 
-  // final product = Get.find<ProductEntity>();
-
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -146,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 productList: productList,
                               ));
                             },
-                            produtList: productList,
+                            productList: productList,
                             colors: colors,
                             textStyle: textStyle);
 

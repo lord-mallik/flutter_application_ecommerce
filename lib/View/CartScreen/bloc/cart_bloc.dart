@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 part 'cart_event.dart';
+
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
@@ -19,7 +20,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           final productList = await cartFunctions.getProductFromHive();
           final String totalPrice =
               cartFunctions.calculateTotalPrice(productList: productList);
-              emit(CartLoading());
+          emit(CartLoading());
           if (productList.isNotEmpty) {
             emit(CartSuccess(productList: productList, totalPrice: totalPrice));
           } else {

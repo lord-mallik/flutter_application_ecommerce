@@ -67,36 +67,43 @@ class _AddressScreenState extends State<AddressScreen> {
           final defaultPhysics = duplicateController.uiDuplicate.defaultScroll;
           Widget dropDown({required List<DropdownMenuItem> countryList}) {
             return DropdownButtonFormField2(
-                buttonWidth: Get.size.width * 0.9,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
-                isDense: true,
-                hint: Text(
-                  "select country",
-                  style: textStyle.bodyNormal,
-                ),
-                validator: (value) {
-                  if (value == null) {
-                    return "please select country";
-                  } else {
-                    return null;
-                  }
-                },
-                dropdownMaxHeight: Get.size.height * 0.4,
-                dropdownDecoration: dropDownDecoration(),
-                onChanged: (value) {
-                  country = value;
-                },
-                searchController: searchController,
-                searchInnerWidget: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: TextField(
-                    controller: searchController,
-                    decoration: const InputDecoration(hintText: "search here"),
+              buttonWidth: Get.size.width * 0.9,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    15,
                   ),
                 ),
-                items: countryList);
+              ),
+              isDense: true,
+              hint: Text(
+                "select country",
+                style: textStyle.bodyNormal,
+              ),
+              validator: (value) {
+                if (value == null) {
+                  return "please select country";
+                } else {
+                  return null;
+                }
+              },
+              dropdownMaxHeight: Get.size.height * 0.4,
+              dropdownDecoration: dropDownDecoration(),
+              onChanged: (value) {
+                country = value;
+              },
+              searchController: searchController,
+              searchInnerWidget: Padding(
+                padding: const EdgeInsets.all(12),
+                child: TextField(
+                  controller: searchController,
+                  decoration: const InputDecoration(
+                    hintText: "Search here",
+                  ),
+                ),
+              ),
+              items: countryList,
+            );
           }
 
           if (state is AddressDefaultScreen) {
@@ -111,55 +118,68 @@ class _AddressScreenState extends State<AddressScreen> {
                   height: 60,
                   width: Get.size.width * 0.5,
                   child: FloatingActionButton.extended(
-                      backgroundColor: colors.primary,
-                      onPressed: () {
-                        addAddressBottomSheet(
-                            scrollPhysics: defaultPhysics,
-                            textStyle: textStyle,
-                            colors: colors,
-                            osSaveClicked: () {
-                              if (adNameKey.currentState!.validate() &&
-                                  addressKey.currentState!.validate() &&
-                                  stateKey.currentState!.validate() &&
-                                  postalKey.currentState!.validate()) {
-                                if (country.isNotEmpty) {
-                                  Get.back();
-                                  addressBloc!.add(AddressAddNew(AddressEntity(
-                                      addressDetail: addressController.text,
-                                      addressName: adNameController.text,
-                                      state: stateController.text,
-                                      postalCode:
-                                          int.parse(postalController.text),
-                                      country: country)));
-                                } else {
-                                  snackBar(
-                                      title: "Country",
-                                      message: "Please select your country",
-                                      textStyle: textStyle,
-                                      colors: colors);
-                                }
-                              }
-                            },
-                            adNameController: adNameController,
-                            adNameKey: adNameKey,
-                            stateController: stateController,
-                            stateKey: stateKey,
-                            addressController: addressController,
-                            addressKey: addressKey,
-                            postalController: postalController,
-                            postalKey: postalKey,
-                            dropDown:
-                                dropDown(countryList: state.countryItemList));
-                      },
-                      label: AutoSizeText(
-                        "Add new address",
-                        style: textStyle.bodyNormal
-                            .copyWith(color: colors.whiteColor),
-                        maxLines: 2,
-                      )),
+                    backgroundColor: colors.primary,
+                    onPressed: () {
+                      addAddressBottomSheet(
+                        scrollPhysics: defaultPhysics,
+                        textStyle: textStyle,
+                        colors: colors,
+                        osSaveClicked: () {
+                          if (adNameKey.currentState!.validate() &&
+                              addressKey.currentState!.validate() &&
+                              stateKey.currentState!.validate() &&
+                              postalKey.currentState!.validate()) {
+                            if (country.isNotEmpty) {
+                              Get.back();
+                              addressBloc!.add(
+                                AddressAddNew(
+                                  AddressEntity(
+                                    addressDetail: addressController.text,
+                                    addressName: adNameController.text,
+                                    state: stateController.text,
+                                    postalCode: int.parse(
+                                      postalController.text,
+                                    ),
+                                    country: country,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              snackBar(
+                                title: "Country",
+                                message: "Please select your country",
+                                textStyle: textStyle,
+                                colors: colors,
+                              );
+                            }
+                          }
+                        },
+                        adNameController: adNameController,
+                        adNameKey: adNameKey,
+                        stateController: stateController,
+                        stateKey: stateKey,
+                        addressController: addressController,
+                        addressKey: addressKey,
+                        postalController: postalController,
+                        postalKey: postalKey,
+                        dropDown: dropDown(
+                          countryList: state.countryItemList,
+                        ),
+                      );
+                    },
+                    label: AutoSizeText(
+                      "Add new address",
+                      style: textStyle.bodyNormal.copyWith(
+                        color: colors.whiteColor,
+                      ),
+                      maxLines: 2,
+                    ),
+                  ),
                 ),
                 body: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(
+                    bottom: 20,
+                  ),
                   physics: duplicateController.uiDuplicate.defaultScroll,
                   itemCount: state.addressList.length,
                   itemBuilder: (context, index) {
@@ -167,10 +187,20 @@ class _AddressScreenState extends State<AddressScreen> {
 
                     return Container(
                       decoration: BoxDecoration(
-                          color: colors.gray,
-                          borderRadius: BorderRadius.circular(12)),
-                      margin: const EdgeInsets.fromLTRB(15, 10, 15, 15),
-                      padding: const EdgeInsets.all(12),
+                        color: colors.gray,
+                        borderRadius: BorderRadius.circular(
+                          12,
+                        ),
+                      ),
+                      margin: const EdgeInsets.fromLTRB(
+                        15,
+                        10,
+                        15,
+                        15,
+                      ),
+                      padding: const EdgeInsets.all(
+                        12,
+                      ),
                       child: Row(
                         children: [
                           SizedBox(
@@ -178,7 +208,9 @@ class _AddressScreenState extends State<AddressScreen> {
                             height: 60,
                             child: CircleAvatar(
                               backgroundColor: colors.whiteColor,
-                              child: LottieBuilder.network(locationLottie),
+                              child: LottieBuilder.network(
+                                locationLottie,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -240,12 +272,16 @@ class _AddressScreenState extends State<AddressScreen> {
                                                 "Yes",
                                                 style: textStyle.bodyNormal
                                                     .copyWith(
-                                                        color: colors.red),
+                                                  color: colors.red,
+                                                ),
                                               ),
                                               onPressed: () {
                                                 Get.back();
-                                                addressBloc!.add(AddressRemove(
-                                                    address.postalCode));
+                                                addressBloc!.add(
+                                                  AddressRemove(
+                                                    address.postalCode,
+                                                  ),
+                                                );
                                               },
                                             ),
                                           ],
@@ -255,69 +291,71 @@ class _AddressScreenState extends State<AddressScreen> {
                                   },
                                 ),
                                 addressEditButton(
-                                    callback: () {
-                                      adNameController.text =
-                                          address.addressName;
-                                      addressController.text =
-                                          address.addressDetail;
-                                      postalController.text =
-                                          address.postalCode.toString();
-                                      stateController.text = address.state;
+                                  callback: () {
+                                    adNameController.text = address.addressName;
+                                    addressController.text =
+                                        address.addressDetail;
+                                    postalController.text =
+                                        address.postalCode.toString();
+                                    stateController.text = address.state;
 
-                                      addAddressBottomSheet(
-                                        scrollPhysics: defaultPhysics,
-                                        textStyle: textStyle,
-                                        colors: colors,
-                                        osSaveClicked: () {
-                                          if (adNameKey.currentState!
-                                                  .validate() &&
-                                              addressKey.currentState!
-                                                  .validate() &&
-                                              stateKey.currentState!
-                                                  .validate() &&
-                                              postalKey.currentState!
-                                                  .validate()) {
-                                            if (country.isNotEmpty) {
-                                              Get.back();
-                                              addressBloc!.add(AddressEdit(
-                                                  addressEntity: AddressEntity(
-                                                      addressDetail:
-                                                          addressController
-                                                              .text,
-                                                      addressName:
-                                                          adNameController.text,
-                                                      state:
-                                                          stateController.text,
-                                                      postalCode: int.parse(
-                                                          postalController
-                                                              .text),
-                                                      country: country),
-                                                  postalCode:
-                                                      address.postalCode));
-                                            } else {
-                                              snackBar(
-                                                  title: "Country",
-                                                  message:
-                                                      "Please select your country",
-                                                  textStyle: textStyle,
-                                                  colors: colors);
-                                            }
+                                    addAddressBottomSheet(
+                                      scrollPhysics: defaultPhysics,
+                                      textStyle: textStyle,
+                                      colors: colors,
+                                      osSaveClicked: () {
+                                        if (adNameKey.currentState!
+                                                .validate() &&
+                                            addressKey.currentState!
+                                                .validate() &&
+                                            stateKey.currentState!.validate() &&
+                                            postalKey.currentState!
+                                                .validate()) {
+                                          if (country.isNotEmpty) {
+                                            Get.back();
+                                            addressBloc!.add(
+                                              AddressEdit(
+                                                addressEntity: AddressEntity(
+                                                  addressDetail:
+                                                      addressController.text,
+                                                  addressName:
+                                                      adNameController.text,
+                                                  state: stateController.text,
+                                                  postalCode: int.parse(
+                                                    postalController.text,
+                                                  ),
+                                                  country: country,
+                                                ),
+                                                postalCode: address.postalCode,
+                                              ),
+                                            );
+                                          } else {
+                                            snackBar(
+                                              title: "Country",
+                                              message:
+                                                  "Please select your country",
+                                              textStyle: textStyle,
+                                              colors: colors,
+                                            );
                                           }
-                                        },
-                                        adNameController: adNameController,
-                                        adNameKey: adNameKey,
-                                        stateController: stateController,
-                                        stateKey: stateKey,
-                                        addressController: addressController,
-                                        addressKey: addressKey,
-                                        postalController: postalController,
-                                        postalKey: postalKey,
-                                        dropDown: dropDown(
-                                            countryList: state.countryItemList),
-                                      );
-                                    },
-                                    colors: colors,
-                                    textStyle: textStyle),
+                                        }
+                                      },
+                                      adNameController: adNameController,
+                                      adNameKey: adNameKey,
+                                      stateController: stateController,
+                                      stateKey: stateKey,
+                                      addressController: addressController,
+                                      addressKey: addressKey,
+                                      postalController: postalController,
+                                      postalKey: postalKey,
+                                      dropDown: dropDown(
+                                        countryList: state.countryItemList,
+                                      ),
+                                    );
+                                  },
+                                  colors: colors,
+                                  textStyle: textStyle,
+                                ),
                               ],
                             ),
                           ),
@@ -333,7 +371,9 @@ class _AddressScreenState extends State<AddressScreen> {
           } else if (state is AddressError) {
             return AppException(
               callback: () {
-                addressBloc!.add(AddressStart());
+                addressBloc!.add(
+                  AddressStart(),
+                );
               },
             );
           } else if (state is AddressEmpty) {
@@ -348,51 +388,62 @@ class _AddressScreenState extends State<AddressScreen> {
                   height: 60,
                   width: Get.size.width * 0.5,
                   child: FloatingActionButton.extended(
-                      backgroundColor: colors.primary,
-                      onPressed: () {
-                        addAddressBottomSheet(
-                            scrollPhysics: defaultPhysics,
-                            textStyle: textStyle,
-                            colors: colors,
-                            osSaveClicked: () {
-                              if (adNameKey.currentState!.validate() &&
-                                  addressKey.currentState!.validate() &&
-                                  stateKey.currentState!.validate() &&
-                                  postalKey.currentState!.validate()) {
-                                if (country.isNotEmpty) {
-                                  Get.back();
-                                  addressBloc!.add(AddressAddNew(AddressEntity(
-                                      addressDetail: addressController.text,
-                                      addressName: adNameController.text,
-                                      state: stateController.text,
-                                      postalCode:
-                                          int.parse(postalController.text),
-                                      country: country)));
-                                } else {
-                                  snackBar(
-                                      title: "Country",
-                                      message: "Please select your country",
-                                      textStyle: textStyle,
-                                      colors: colors);
-                                }
-                              }
-                            },
-                            adNameController: adNameController,
-                            adNameKey: adNameKey,
-                            stateController: stateController,
-                            stateKey: stateKey,
-                            addressController: addressController,
-                            addressKey: addressKey,
-                            postalController: postalController,
-                            postalKey: postalKey,
-                            dropDown: dropDown(countryList: state.countryList));
-                      },
-                      label: AutoSizeText(
-                        "Add new address",
-                        style: textStyle.bodyNormal
-                            .copyWith(color: colors.whiteColor),
-                        maxLines: 2,
-                      )),
+                    backgroundColor: colors.primary,
+                    onPressed: () {
+                      addAddressBottomSheet(
+                        scrollPhysics: defaultPhysics,
+                        textStyle: textStyle,
+                        colors: colors,
+                        osSaveClicked: () {
+                          if (adNameKey.currentState!.validate() &&
+                              addressKey.currentState!.validate() &&
+                              stateKey.currentState!.validate() &&
+                              postalKey.currentState!.validate()) {
+                            if (country.isNotEmpty) {
+                              Get.back();
+                              addressBloc!.add(
+                                AddressAddNew(
+                                  AddressEntity(
+                                    addressDetail: addressController.text,
+                                    addressName: adNameController.text,
+                                    state: stateController.text,
+                                    postalCode: int.parse(
+                                      postalController.text,
+                                    ),
+                                    country: country,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              snackBar(
+                                  title: "Country",
+                                  message: "Please select your country",
+                                  textStyle: textStyle,
+                                  colors: colors);
+                            }
+                          }
+                        },
+                        adNameController: adNameController,
+                        adNameKey: adNameKey,
+                        stateController: stateController,
+                        stateKey: stateKey,
+                        addressController: addressController,
+                        addressKey: addressKey,
+                        postalController: postalController,
+                        postalKey: postalKey,
+                        dropDown: dropDown(
+                          countryList: state.countryList,
+                        ),
+                      );
+                    },
+                    label: AutoSizeText(
+                      "Add new address",
+                      style: textStyle.bodyNormal.copyWith(
+                        color: colors.whiteColor,
+                      ),
+                      maxLines: 2,
+                    ),
+                  ),
                 ),
                 body: Column(
                   children: [
@@ -402,11 +453,17 @@ class _AddressScreenState extends State<AddressScreen> {
                       height: Get.size.height * 0.6,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
+                      padding: const EdgeInsets.fromLTRB(
+                        15,
+                        20,
+                        15,
+                        0,
+                      ),
                       child: AutoSizeText(
                         "your address list is empty try to add new one",
-                        style: textStyle.bodyNormal
-                            .copyWith(fontWeight: FontWeight.bold),
+                        style: textStyle.bodyNormal.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                         maxLines: 2,
                       ),
                     ),

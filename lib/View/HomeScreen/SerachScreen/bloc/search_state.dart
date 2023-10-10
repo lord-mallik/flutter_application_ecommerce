@@ -14,10 +14,16 @@ class SearchError extends SearchState {}
 class SearchSuccess extends SearchState {
   final List<ProductEntity> productList;
   List<String> getProductNames() {
-    return productList.map((product) => product.name).toList();
+    return productList
+        .map(
+          (product) => product.name,
+        )
+        .toList();
   }
 
-  SearchSuccess({required this.productList});
+  SearchSuccess({
+    required this.productList,
+  });
 }
 
 class SearchEmptyScreen extends SearchState {}

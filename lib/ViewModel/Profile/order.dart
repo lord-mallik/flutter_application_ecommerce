@@ -10,7 +10,9 @@ class OrderFunctions {
     }
   }
 
-  Future<bool> addToOrderBox({required OrderEntity orderEntity}) async {
+  Future<bool> addToOrderBox({
+    required OrderEntity orderEntity,
+  }) async {
     await openOrderBox();
     final box = Hive.box<OrderEntity>(orderBoxName);
     await box.add(orderEntity);

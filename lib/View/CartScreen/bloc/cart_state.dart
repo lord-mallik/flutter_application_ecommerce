@@ -14,5 +14,9 @@ class CartEmpty extends CartState {}
 class CartSuccess extends CartState {
   final List<ProductEntity> productList;
   final String totalPrice;
-  CartSuccess({required this.productList, required this.totalPrice});
+
+  CartSuccess({
+    required this.productList,
+    required this.totalPrice,
+  });
 }

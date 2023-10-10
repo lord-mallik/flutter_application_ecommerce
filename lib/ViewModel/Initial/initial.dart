@@ -8,11 +8,19 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class HighPriorityInitial {
   static Future<void> initial() async {
-    Get.put(DuplicateController());
+    Get.put(
+      DuplicateController(),
+    );
     await GetStorage.init();
     await Hive.initFlutter();
-    Hive.registerAdapter(ProductEntityAdapter());
-    Hive.registerAdapter(AddressEntityAdapter());
-    Hive.registerAdapter(OrderEntityAdapter());
+    Hive.registerAdapter(
+      ProductEntityAdapter(),
+    );
+    Hive.registerAdapter(
+      AddressEntityAdapter(),
+    );
+    Hive.registerAdapter(
+      OrderEntityAdapter(),
+    );
   }
 }

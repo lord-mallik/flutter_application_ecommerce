@@ -12,8 +12,9 @@ class OrderEntity {
   @HiveField(2)
   final DateTime time;
 
-  OrderEntity(
-      {required this.productList,
-      required this.totalPrice,
-      required this.time});
+  OrderEntity({
+    required this.productList,
+    required this.totalPrice,
+    required this.time,
+  });
 }

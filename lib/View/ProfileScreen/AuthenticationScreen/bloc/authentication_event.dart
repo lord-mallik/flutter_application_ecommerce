@@ -10,10 +10,11 @@ class AuthenticationLogin extends AuthenticationEvent {
   final String password;
   final bool isRemember;
 
-  AuthenticationLogin(
-      {required this.userName,
-      required this.password,
-      required this.isRemember});
+  AuthenticationLogin({
+    required this.userName,
+    required this.password,
+    required this.isRemember,
+  });
 }
 
 class AuthenticationSignUp extends AuthenticationEvent {
@@ -22,11 +23,12 @@ class AuthenticationSignUp extends AuthenticationEvent {
   final String password;
   final bool isRemember;
 
-  AuthenticationSignUp(
-      {required this.name,
-      required this.userName,
-      required this.password,
-      required this.isRemember});
+  AuthenticationSignUp({
+    required this.name,
+    required this.userName,
+    required this.password,
+    required this.isRemember,
+  });
 }
 
 class AuthenticationSignUpMode extends AuthenticationEvent {}
@@ -39,5 +41,8 @@ class AuthenticationSaveChanges extends AuthenticationEvent {
   final String userName;
   final String password;
 
-  AuthenticationSaveChanges({required this.userName, required this.password});
+  AuthenticationSaveChanges({
+    required this.userName,
+    required this.password,
+  });
 }

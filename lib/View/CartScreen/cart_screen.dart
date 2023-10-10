@@ -30,7 +30,9 @@ class _CartScreenState extends State<CartScreen> {
     return BlocProvider(
       create: (context) {
         final bloc = CartBloc();
-        bloc.add(CartStart());
+        bloc.add(
+          CartStart(),
+        );
         cartBloc = bloc;
         return bloc;
       },
@@ -44,87 +46,111 @@ class _CartScreenState extends State<CartScreen> {
             final productList = state.productList;
             final String totalPrice = state.totalPrice;
             return DuplicateTemplate(
-                colors: colors,
-                textStyle: textStyle,
-                title: "Cart Screen",
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.only(bottom: 120),
-                        physics: uiDuplicate.defaultScroll,
-                        itemCount: productList.length,
-                        itemBuilder: (context, index) {
-                          final product = productList[index];
-                          return HorizontalProductView(
-                              colors: colors,
-                              margin: const EdgeInsets.only(
-                                  top: 15, right: 10, bottom: 15, left: 10),
-                              product: product,
-                              widget: CupertinoButton(
-                                  child: Icon(
-                                    Icons.delete,
-                                    color: colors.whiteColor,
-                                  ),
-                                  onPressed: () async {
-                                    final bool isDeleted =
-                                        await duplicateController.cartFunctions
-                                            .deleteProduct(index: index);
-                                    if (isDeleted) {
-                                      Get.snackbar("Delete", "",
-                                          messageText: Text(
-                                            "Product removed successfully",
-                                            style: textStyle.bodyNormal,
-                                          ),
-                                          backgroundColor: colors.gray);
-                                      cartBloc!.add(CartStart());
-                                    }
-                                  }),
-                              textStyle: textStyle);
-                        },
+              colors: colors,
+              textStyle: textStyle,
+              title: "Cart Screen",
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.only(
+                        bottom: 120,
                       ),
-                    ),
-                    CartBottomItem(
-                      colors: colors,
-                      navigateName: "Checkout",
-                      widget: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Total price",
-                            style: textStyle.bodySmall
-                                .copyWith(color: colors.captionColor),
+                      physics: uiDuplicate.defaultScroll,
+                      itemCount: productList.length,
+                      itemBuilder: (context, index) {
+                        final product = productList[index];
+                        return HorizontalProductView(
+                          colors: colors,
+                          margin: const EdgeInsets.only(
+                            top: 15,
+                            right: 10,
+                            bottom: 15,
+                            left: 10,
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          SizedBox(
-                            width: 200,
-                            child: AutoSizeText(
-                              "₹$totalPrice",
-                              style:
-                                  textStyle.titleLarge.copyWith(fontSize: 20),
-                              maxFontSize: 25,
-                              minFontSize: 16,
-                              maxLines: 2,
+                          product: product,
+                          widget: CupertinoButton(
+                            child: Icon(
+                              Icons.delete,
+                              color: colors.whiteColor,
                             ),
+                            onPressed: () async {
+                              final bool isDeleted = await duplicateController
+                                  .cartFunctions
+                                  .deleteProduct(
+                                index: index,
+                              );
+                              if (isDeleted) {
+                                Get.snackbar(
+                                  "Delete",
+                                  "",
+                                  messageText: Text(
+                                    "Product removed successfully",
+                                    style: textStyle.bodyNormal,
+                                  ),
+                                  backgroundColor: colors.gray,
+                                );
+                                cartBloc!.add(
+                                  CartStart(),
+                                );
+                              }
+                            },
                           ),
-                        ],
-                      ),
-                      textStyle: textStyle,
-                      callback: () {
-                        Get.to(CheckoutScreen(
-                            productList: productList, totalPrice: totalPrice));
+                          textStyle: textStyle,
+                        );
                       },
                     ),
-                  ],
-                ));
+                  ),
+                  CartBottomItem(
+                    colors: colors,
+                    navigateName: "Checkout",
+                    widget: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Total price",
+                          style: textStyle.bodySmall.copyWith(
+                            color: colors.captionColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        SizedBox(
+                          width: 200,
+                          child: AutoSizeText(
+                            "₹$totalPrice",
+                            style: textStyle.titleLarge.copyWith(
+                              fontSize: 20,
+                            ),
+                            maxFontSize: 25,
+                            minFontSize: 16,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    textStyle: textStyle,
+                    callback: () {
+                      Get.to(
+                        CheckoutScreen(
+                          productList: productList,
+                          totalPrice: totalPrice,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
           } else if (state is CartLoading) {
             return const CustomLoading();
           } else if (state is CartError) {
             return AppException(
               callback: () {
-                cartBloc!.add(CartStart());
+                cartBloc!.add(
+                  CartStart(),
+                );
               },
             );
           } else if (state is CartEmpty) {

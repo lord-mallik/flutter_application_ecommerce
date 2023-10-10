@@ -20,11 +20,18 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         final orderHistoryList =
             await profileController.orderFunctions.getOrderList();
         if (orderHistoryList.isNotEmpty) {
-          emit(OrderInitialScreen(
+          emit(
+            OrderInitialScreen(
               duplicateController: duplicateController,
-              orderHistoryList: orderHistoryList));
+              orderHistoryList: orderHistoryList,
+            ),
+          );
         } else {
-          emit(OrderEmpty(duplicateController));
+          emit(
+            OrderEmpty(
+              duplicateController,
+            ),
+          );
         }
       }
     });

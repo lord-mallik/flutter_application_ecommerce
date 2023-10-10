@@ -13,14 +13,21 @@ class ProfileFunctions {
   final GetStorage storage = GetStorage();
   final String favoriteBox = "Favorite Box";
 
-  Future<bool> saveImageInStorage({required String path}) async {
-    await storage.write(imageStorage, path);
+  Future<bool> saveImageInStorage({
+    required String path,
+  }) async {
+    await storage.write(
+      imageStorage,
+      path,
+    );
     return true;
   }
 
   Future<bool> getUserImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? xFile = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? xFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
     final ProfileController profileController = Get.find<ProfileController>();
     if (xFile != null) {
       bool isSaved = await saveImageInStorage(path: xFile.path);
@@ -52,7 +59,9 @@ class ProfileFunctions {
     await Hive.openBox<ProductEntity>(favoriteBox);
   }
 
-  Future<bool> addToFavorite({required ProductEntity productEntity}) async {
+  Future<bool> addToFavorite({
+    required ProductEntity productEntity,
+  }) async {
     final box = Hive.box<ProductEntity>(favoriteBox);
     await box.put(productEntity.id, productEntity);
     return true;
@@ -68,7 +77,9 @@ class ProfileFunctions {
     return productList;
   }
 
-  bool isInFavoriteBox({required ProductEntity productEntity}) {
+  bool isInFavoriteBox({
+    required ProductEntity productEntity,
+  }) {
     final box = Hive.box<ProductEntity>(favoriteBox);
     for (var element in box.values) {
       if (productEntity.id == element.id) {
@@ -78,9 +89,13 @@ class ProfileFunctions {
     return false;
   }
 
-  Future<bool> removeFavorite({required ProductEntity productEntity}) async {
+  Future<bool> removeFavorite({
+    required ProductEntity productEntity,
+  }) async {
     final box = Hive.box<ProductEntity>(favoriteBox);
-    await box.delete(productEntity.id);
+    await box.delete(
+      productEntity.id,
+    );
     return true;
   }
 

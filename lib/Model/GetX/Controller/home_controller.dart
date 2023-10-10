@@ -5,6 +5,10 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final HomeRepository homeRepositoryInstance = HomeRepository(
-      dataSource: HomeRemoteDataSource(httpClient: HttpPackage().dio));
+    dataSource: HomeRemoteDataSource(
+      httpClient: HttpPackage().dio,
+    ),
+  );
+
   HomeRepository get homeRepository => homeRepositoryInstance;
 }

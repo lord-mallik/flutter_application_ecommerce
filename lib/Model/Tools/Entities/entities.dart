@@ -14,6 +14,9 @@ class UserInformation {
   final String userName;
   final String password;
 
-  UserInformation(
-      {required this.userName, required this.password, required this.name});
+  UserInformation({
+    required this.userName,
+    required this.password,
+    required this.name,
+  });
 }

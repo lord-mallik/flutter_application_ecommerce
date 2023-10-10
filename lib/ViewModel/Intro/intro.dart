@@ -4,7 +4,10 @@ class IntroFunctions {
   final String key = "LaunchStatus";
   Future<void> saveLaunchStatus({required bool status}) async {
     final GetStorage storage = GetStorage();
-    await storage.write(key, status);
+    await storage.write(
+      key,
+      status,
+    );
   }
 
   bool getLaunchStatus() {

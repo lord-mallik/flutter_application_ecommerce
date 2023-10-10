@@ -5,8 +5,9 @@ class CustomTextStyle {
   final CustomColors colors = CustomColors();
 
   late TextStyle bodyNormal = TextStyle(
-    fontFamily: 'CustomFont', // Use the name specified in pubspec.yaml
-    fontSize: 20, color: colors.blackColor,
+    fontFamily: 'CustomFont',
+    fontSize: 20,
+    color: colors.blackColor,
   );
 
   late TextStyle bodySmall = TextStyle(

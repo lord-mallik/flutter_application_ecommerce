@@ -27,7 +27,9 @@ class _OrderScreenState extends State<OrderScreen> {
       create: (context) {
         final bloc = OrderBloc();
         orderBloc = bloc;
-        bloc.add(OrderInitialEvent());
+        bloc.add(
+          OrderInitialEvent(),
+        );
         return bloc;
       },
       child: BlocBuilder<OrderBloc, OrderState>(
@@ -46,11 +48,20 @@ class _OrderScreenState extends State<OrderScreen> {
                 itemBuilder: (context, index) {
                   final order = state.orderHistoryList[index];
                   return Container(
-                    margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-                    padding: const EdgeInsets.all(12),
+                    margin: const EdgeInsets.fromLTRB(
+                      15,
+                      10,
+                      15,
+                      10,
+                    ),
+                    padding: const EdgeInsets.all(
+                      12,
+                    ),
                     decoration: BoxDecoration(
                       color: colors.gray,
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(
+                        15,
+                      ),
                     ),
                     child: Column(
                       children: [
@@ -68,29 +79,40 @@ class _OrderScreenState extends State<OrderScreen> {
                               CupertinoButton(
                                 child: Text(
                                   "View detail",
-                                  style: textStyle.bodyNormal
-                                      .copyWith(color: colors.primary),
+                                  style: textStyle.bodyNormal.copyWith(
+                                    color: colors.primary,
+                                  ),
                                 ),
                                 onPressed: () {
-                                  Get.to(OrderDetailScreen(
-                                      productList: order.productList));
+                                  Get.to(
+                                    OrderDetailScreen(
+                                      productList: order.productList,
+                                    ),
+                                  );
                                 },
                               )
                             ],
                           ),
                         ),
                         orderHistoryItem(
-                            rightTitle: order.time.toString().substring(0, 16),
-                            leftTitle: "Date :",
-                            leftStyle: textStyle.bodyNormal,
-                            rightStyle: textStyle.bodyNormal
-                                .copyWith(color: colors.captionColor)),
+                          rightTitle: order.time.toString().substring(
+                                0,
+                                16,
+                              ),
+                          leftTitle: "Date :",
+                          leftStyle: textStyle.bodyNormal,
+                          rightStyle: textStyle.bodyNormal.copyWith(
+                            color: colors.captionColor,
+                          ),
+                        ),
                         orderHistoryItem(
-                            rightTitle: order.totalPrice,
-                            leftTitle: "Amount :",
-                            leftStyle: textStyle.bodyNormal,
-                            rightStyle: textStyle.bodyNormal
-                                .copyWith(color: colors.captionColor)),
+                          rightTitle: order.totalPrice,
+                          leftTitle: "Amount :",
+                          leftStyle: textStyle.bodyNormal,
+                          rightStyle: textStyle.bodyNormal.copyWith(
+                            color: colors.captionColor,
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -100,11 +122,12 @@ class _OrderScreenState extends State<OrderScreen> {
           } else if (state is OrderEmpty) {
             final duplicateController = state.duplicateController;
             return EmptyScreen(
-                colors: duplicateController.colors,
-                textStyle: duplicateController.textStyle,
-                title: "Order history",
-                content: "Your order history is empty",
-                lottieName: emptyListLottie);
+              colors: duplicateController.colors,
+              textStyle: duplicateController.textStyle,
+              title: "Order history",
+              content: "Your order history is empty",
+              lottieName: emptyListLottie,
+            );
           } else if (state is OrderLoading) {
             return const CustomLoading();
           }
@@ -120,7 +143,12 @@ class _OrderScreenState extends State<OrderScreen> {
       required TextStyle leftStyle,
       required TextStyle rightStyle}) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
+      padding: const EdgeInsets.only(
+        left: 5,
+        right: 5,
+        top: 10,
+        bottom: 10,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

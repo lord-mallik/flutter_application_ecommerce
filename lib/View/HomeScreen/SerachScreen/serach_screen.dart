@@ -12,7 +12,9 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  const SearchScreen({
+    super.key,
+  });
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -36,10 +38,13 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       body: BlocProvider(
         create: (context) {
-          final bloc =
-              SearchBloc(homeRepository: homeController.homeRepository);
+          final bloc = SearchBloc(
+            homeRepository: homeController.homeRepository,
+          );
           searchBloc = bloc;
-          bloc.add(InitialSearchScreen());
+          bloc.add(
+            InitialSearchScreen(),
+          );
           return bloc;
         },
         child: BlocBuilder<SearchBloc, SearchState>(
@@ -53,28 +58,30 @@ class _SearchScreenState extends State<SearchScreen> {
                   backgroundColor: colors.whiteColor,
                   foregroundColor: colors.blackColor,
                   title: Form(
-                      key: formKey,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isNotEmpty) {
-                            return null;
-                          } else {
-                            snackBar(
-                                title: "Search",
-                                message: "please type somethings ...",
-                                textStyle: textStyle,
-                                colors: colors);
-                            return "";
-                          }
-                        },
-                        controller: searchController,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.zero,
-                          border: InputBorder.none,
-                          hintText: "Search...",
-                          hintStyle: textStyle.bodyNormal,
-                        ),
-                      )),
+                    key: formKey,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isNotEmpty) {
+                          return null;
+                        } else {
+                          snackBar(
+                            title: "Search",
+                            message: "Please type somethings ...",
+                            textStyle: textStyle,
+                            colors: colors,
+                          );
+                          return "";
+                        }
+                      },
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                        border: InputBorder.none,
+                        hintText: "Search...",
+                        hintStyle: textStyle.bodyNormal,
+                      ),
+                    ),
+                  ),
                   actions: [
                     CupertinoButton(
                       child: Icon(
@@ -83,15 +90,20 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          searchBloc!.add(SearchStart(
-                              searchKeyWord: searchController.text));
+                          searchBloc!.add(
+                            SearchStart(
+                              searchKeyWord: searchController.text,
+                            ),
+                          );
                         }
                       },
                     )
                   ],
                 ),
                 body: Center(
-                  child: LottieBuilder.network(searchLottie),
+                  child: LottieBuilder.network(
+                    searchLottie,
+                  ),
                 ),
               );
             } else if (state is SearchSuccess) {
@@ -102,32 +114,37 @@ class _SearchScreenState extends State<SearchScreen> {
                   backgroundColor: colors.blackColor,
                   title: Text(
                     "Search Result",
-                    style:
-                        textStyle.titleLarge.copyWith(color: colors.whiteColor),
+                    style: textStyle.titleLarge.copyWith(
+                      color: colors.whiteColor,
+                    ),
                   ),
                 ),
                 body: gridViewScreensContainer(
+                  colors: colors,
+                  child: ProductGrideView(
+                    productList: state.productList,
+                    uiDuplicate: duplicateController.uiDuplicate,
                     colors: colors,
-                    child: ProductGrideView(
-                      productList: state.productList,
-                      uiDuplicate: duplicateController.uiDuplicate,
-                      colors: colors,
-                      textStyle: textStyle,
-                    )),
+                    textStyle: textStyle,
+                  ),
+                ),
               );
             } else if (state is SearchEmptyScreen) {
               return EmptyScreen(
-                  colors: colors,
-                  textStyle: textStyle,
-                  title: "Search Result",
-                  content: "Nothing found",
-                  lottieName: emptySearchLottie);
+                colors: colors,
+                textStyle: textStyle,
+                title: "Search Result",
+                content: "Nothing found",
+                lottieName: emptySearchLottie,
+              );
             } else if (state is SearchLoading) {
               return const CustomLoading();
             } else if (state is SearchError) {
               return AppException(
                 callback: () {
-                  searchBloc!.add(InitialSearchScreen());
+                  searchBloc!.add(
+                    InitialSearchScreen(),
+                  );
                 },
               );
             }

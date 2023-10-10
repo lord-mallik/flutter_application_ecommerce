@@ -20,7 +20,11 @@ import 'package:lottie/lottie.dart';
 import 'CustomBadge.dart';
 
 class AppException extends StatelessWidget {
-  const AppException({super.key, this.callback, this.errorMessage});
+  const AppException({
+    super.key,
+    this.callback,
+    this.errorMessage,
+  });
 
   final GestureTapCallback? callback;
   final String? errorMessage;
@@ -47,11 +51,12 @@ class AppException extends StatelessWidget {
               height: 10,
             ),
             ElevatedButton(
-                onPressed: callback,
-                child: Text(
-                  "try Again",
-                  style: textStyle.bodyNormal,
-                ))
+              onPressed: callback,
+              child: Text(
+                "try Again",
+                style: textStyle.bodyNormal,
+              ),
+            )
           ],
         ),
       ),
@@ -68,7 +73,9 @@ class CustomLoading extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: LoadingAnimationWidget.staggeredDotsWave(
-            color: colors.primary, size: 50),
+          color: colors.primary,
+          size: 50,
+        ),
       ),
     );
   }
@@ -78,10 +85,16 @@ Widget imageLoading() {
   final controller = Get.find<DuplicateController>();
   final colors = controller.colors;
   return LoadingAnimationWidget.halfTriangleDot(
-      color: colors.primary, size: 20);
+    color: colors.primary,
+    size: 20,
+  );
 }
 
-Widget networkImage({required String imageUrl, double? width, double? height}) {
+Widget networkImage({
+  required String imageUrl,
+  double? width,
+  double? height,
+}) {
   return CachedNetworkImage(
     imageUrl: imageUrl,
     fit: BoxFit.cover,
@@ -94,13 +107,13 @@ Widget networkImage({required String imageUrl, double? width, double? height}) {
 }
 
 class HomeProductView extends StatelessWidget {
-  const HomeProductView(
-      {Key? key,
-      required this.product,
-      required this.textStyle,
-      required this.colors,
-      required this.profileFunctions})
-      : super(key: key);
+  const HomeProductView({
+    Key? key,
+    required this.product,
+    required this.textStyle,
+    required this.colors,
+    required this.profileFunctions,
+  }) : super(key: key);
 
   final ProductEntity product;
   final CustomTextStyle textStyle;
@@ -114,7 +127,11 @@ class HomeProductView extends StatelessWidget {
       builder: (context, value, child) {
         return InkWell(
           onTap: () {
-            Get.to(DetailScreen(productEntity: product));
+            Get.to(
+              DetailScreen(
+                productEntity: product,
+              ),
+            );
           },
           child: CustomBadge(
             badgeColor: colors.amber,
@@ -122,7 +139,11 @@ class HomeProductView extends StatelessWidget {
             text: 'Favorite',
             textStyle: textStyle.bodyNormal,
             onPress: () {
-              Get.to(DetailScreen(productEntity: product));
+              Get.to(
+                DetailScreen(
+                  productEntity: product,
+                ),
+              );
             },
             icon: Icons.favorite,
             iconColor: Colors.white,
@@ -134,7 +155,9 @@ class HomeProductView extends StatelessWidget {
                 SizedBox(
                   width: 80,
                   height: 80,
-                  child: networkImage(imageUrl: product.imageUrl),
+                  child: networkImage(
+                    imageUrl: product.imageUrl,
+                  ),
                 ),
                 Text(
                   product.name.split("Maybelline").last.substring(0, 7),
@@ -157,12 +180,13 @@ class HomeProductView extends StatelessWidget {
 }
 
 class FavoriteBadge extends StatefulWidget {
-  const FavoriteBadge(
-      {super.key,
-      required this.product,
-      required this.badgeBackgroundColor,
-      required this.activeColor,
-      required this.inActive});
+  const FavoriteBadge({
+    super.key,
+    required this.product,
+    required this.badgeBackgroundColor,
+    required this.activeColor,
+    required this.inActive,
+  });
 
   final ProductEntity product;
   final Color badgeBackgroundColor;
@@ -187,12 +211,19 @@ class _FavoriteBadgeState extends State<FavoriteBadge> {
         child: GestureDetector(
           onTap: () async {
             if (isInBox) {
-              profileFunctions.removeFavorite(productEntity: widget.product);
-              setState(() {});
+              profileFunctions.removeFavorite(
+                productEntity: widget.product,
+              );
+              setState(
+                () {},
+              );
             } else {
               await profileFunctions.addToFavorite(
-                  productEntity: widget.product);
-              setState(() {});
+                productEntity: widget.product,
+              );
+              setState(
+                () {},
+              );
             }
           },
           child: isInBox
@@ -254,7 +285,9 @@ class ShopProductView extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: networkImage(imageUrl: product.imageUrl),
+                child: networkImage(
+                  imageUrl: product.imageUrl,
+                ),
               ),
             ),
             const SizedBox(
@@ -262,14 +295,18 @@ class ShopProductView extends StatelessWidget {
             ),
             Text(
               product.productType,
-              style: textStyle.bodyNormal.copyWith(color: colors.blackColor),
+              style: textStyle.bodyNormal.copyWith(
+                color: colors.blackColor,
+              ),
             ),
             const SizedBox(
               height: 5,
             ),
             Text(
               "₹${product.price}",
-              style: textStyle.bodyNormal.copyWith(color: colors.blackColor),
+              style: textStyle.bodyNormal.copyWith(
+                color: colors.blackColor,
+              ),
             ),
           ],
         ),
@@ -301,7 +338,9 @@ class CartLengthBadge extends StatelessWidget {
           badgeColor: colors.primary,
           textColor: colors.whiteColor,
           text: value.values.length.toString(),
-          textStyle: textStyle.bodySmall.copyWith(color: colors.whiteColor),
+          textStyle: textStyle.bodySmall.copyWith(
+            color: colors.whiteColor,
+          ),
           onPress: badgeCallback,
           child: CupertinoButton(
             onPressed: badgeCallback,
@@ -336,21 +375,37 @@ class HorizontalProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(DetailScreen(productEntity: product));
+        Get.to(
+          DetailScreen(
+            productEntity: product,
+          ),
+        );
       },
       child: Container(
         margin: margin,
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(
+          15,
+        ),
         decoration: BoxDecoration(
-            color: colors.blackColor, borderRadius: BorderRadius.circular(15)),
+          color: colors.blackColor,
+          borderRadius: BorderRadius.circular(
+            15,
+          ),
+        ),
         child: Row(
           children: [
             ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: networkImage(imageUrl: product.imageUrl))),
+              borderRadius: BorderRadius.circular(
+                12,
+              ),
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: networkImage(
+                  imageUrl: product.imageUrl,
+                ),
+              ),
+            ),
             const SizedBox(
               width: 20,
             ),
@@ -362,7 +417,9 @@ class HorizontalProductView extends StatelessWidget {
                   child: Text(
                     product.name,
                     style: textStyle.bodyNormal.copyWith(
-                        fontWeight: FontWeight.bold, color: colors.whiteColor),
+                      fontWeight: FontWeight.bold,
+                      color: colors.whiteColor,
+                    ),
                     overflow: TextOverflow.clip,
                   ),
                 ),
@@ -379,8 +436,9 @@ class HorizontalProductView extends StatelessWidget {
                         children: [
                           Text(
                             product.productType,
-                            style: textStyle.bodyNormal
-                                .copyWith(color: colors.whiteColor),
+                            style: textStyle.bodyNormal.copyWith(
+                              color: colors.whiteColor,
+                            ),
                           ),
                           const SizedBox(
                             height: 10,
@@ -388,15 +446,16 @@ class HorizontalProductView extends StatelessWidget {
                           Text(
                             "₹${product.price}",
                             style: textStyle.bodyNormal.copyWith(
-                                color: colors.whiteColor,
-                                fontWeight: FontWeight.bold),
+                              color: colors.whiteColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
                       widget
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ],
@@ -425,86 +484,114 @@ class CartBottomItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        bottom: 0,
-        child: Container(
-          width: Get.mediaQuery.size.width,
-          height: 100,
-          decoration: BoxDecoration(
-              color: colors.gray,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(15))),
-          padding:
-              const EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              widget != null ? widget! : Container(),
-              Expanded(
-                child: SizedBox(
-                  height: 50,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(colors.blackColor)),
-                        onPressed: callback,
-                        child: Text(
-                          navigateName,
-                          style: textStyle.bodyNormal
-                              .copyWith(color: colors.whiteColor),
-                        )),
+      bottom: 0,
+      child: Container(
+        width: Get.mediaQuery.size.width,
+        height: 100,
+        decoration: BoxDecoration(
+          color: colors.gray,
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(
+              15,
+            ),
+          ),
+        ),
+        padding: const EdgeInsets.only(
+          top: 10,
+          right: 20,
+          left: 20,
+          bottom: 10,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            widget != null ? widget! : Container(),
+            Expanded(
+              child: SizedBox(
+                height: 50,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                    20,
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                        colors.blackColor,
+                      ),
+                    ),
+                    onPressed: callback,
+                    child: Text(
+                      navigateName,
+                      style: textStyle.bodyNormal.copyWith(
+                        color: colors.whiteColor,
+                      ),
+                    ),
                   ),
                 ),
-              )
-            ],
-          ),
-        ));
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
-Widget duplicateContainer(
-    {required CustomColors colors, required Widget child}) {
+Widget duplicateContainer({
+  required CustomColors colors,
+  required Widget child,
+}) {
   return Container(
     width: Get.mediaQuery.size.width,
-    margin: const EdgeInsets.only(top: 30),
+    margin: const EdgeInsets.only(
+      top: 30,
+    ),
     decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
-        color: colors.whiteColor),
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(
+          15,
+        ),
+      ),
+      color: colors.whiteColor,
+    ),
     child: child,
   );
 }
 
-void snackBar(
-    {required String title,
-    required String message,
-    required CustomTextStyle textStyle,
-    required CustomColors colors}) {
-  Get.snackbar(title, "",
-      messageText: AutoSizeText(
-        message,
-        style: textStyle.bodyNormal,
-        maxLines: 1,
-      ),
-      backgroundColor: colors.gray);
+void snackBar({
+  required String title,
+  required String message,
+  required CustomTextStyle textStyle,
+  required CustomColors colors,
+}) {
+  Get.snackbar(
+    title,
+    "",
+    messageText: AutoSizeText(
+      message,
+      style: textStyle.bodyNormal,
+      maxLines: 1,
+    ),
+    backgroundColor: colors.gray,
+  );
 }
 
 class ProductListView extends StatelessWidget {
-  const ProductListView(
-      {super.key,
-      required this.colors,
-      required this.textStyle,
-      required this.productList,
-      required this.title,
-      required this.physics,
-      required this.reverse,
-      required this.callback,
-      required this.profileFunctions});
+  const ProductListView({
+    super.key,
+    required this.colors,
+    required this.textStyle,
+    required this.productList,
+    required this.title,
+    required this.physics,
+    required this.reverse,
+    required this.callback,
+    required this.profileFunctions,
+  });
 
   final CustomColors colors;
   final CustomTextStyle textStyle;
   final List<ProductEntity> productList;
-
   final String title;
   final ScrollPhysics physics;
   final bool reverse;
@@ -514,7 +601,12 @@ class ProductListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+      padding: const EdgeInsets.only(
+        left: 15,
+        right: 15,
+        top: 10,
+        bottom: 10,
+      ),
       child: Column(
         children: [
           Row(
@@ -532,8 +624,9 @@ class ProductListView extends StatelessWidget {
                   children: [
                     Text(
                       "See all",
-                      style:
-                          textStyle.bodyNormal.copyWith(color: colors.primary),
+                      style: textStyle.bodyNormal.copyWith(
+                        color: colors.primary,
+                      ),
                     ),
                     Icon(
                       Icons.keyboard_double_arrow_right,
@@ -541,7 +634,7 @@ class ProductListView extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
           const SizedBox(
@@ -557,7 +650,10 @@ class ProductListView extends StatelessWidget {
               itemBuilder: (context, index) {
                 final product = productList[index];
                 return Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ),
                   child: HomeProductView(
                     profileFunctions: profileFunctions,
                     product: product,
@@ -567,7 +663,7 @@ class ProductListView extends StatelessWidget {
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );
@@ -575,12 +671,13 @@ class ProductListView extends StatelessWidget {
 }
 
 class BannerListView extends StatelessWidget {
-  const BannerListView(
-      {super.key,
-      required this.productList,
-      required this.colors,
-      required this.textStyle,
-      required this.callback});
+  const BannerListView({
+    super.key,
+    required this.productList,
+    required this.colors,
+    required this.textStyle,
+    required this.callback,
+  });
 
   final List<ProductEntity> productList;
   final CustomColors colors;
@@ -590,7 +687,12 @@ class BannerListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+      padding: const EdgeInsets.only(
+        left: 15,
+        right: 15,
+        top: 10,
+        bottom: 10,
+      ),
       child: Column(
         children: [
           Row(
@@ -598,8 +700,9 @@ class BannerListView extends StatelessWidget {
             children: [
               Text(
                 "Top deals",
-                style: textStyle.titleLarge
-                    .copyWith(fontWeight: FontWeight.normal),
+                style: textStyle.titleLarge.copyWith(
+                  fontWeight: FontWeight.normal,
+                ),
               ),
               CupertinoButton(
                 onPressed: callback,
@@ -607,34 +710,36 @@ class BannerListView extends StatelessWidget {
                   children: [
                     Text(
                       "See all",
-                      style:
-                          textStyle.bodyNormal.copyWith(color: colors.primary),
+                      style: textStyle.bodyNormal.copyWith(
+                        color: colors.primary,
+                      ),
                     ),
                     Icon(
                       Icons.keyboard_double_arrow_right,
                       color: colors.primary,
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
           const SizedBox(
             height: 10,
           ),
           CarouselSlider.builder(
-              itemCount: productList.length - 20,
-              itemBuilder: (context, index, realIndex) {
-                return networkImage(
-                  imageUrl: productList[index].imageUrl,
-                );
-              },
-              options: CarouselOptions(
-                enlargeCenterPage: true,
-                autoPlay: true,
-                autoPlayCurve: Curves.easeInCubic,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-              ))
+            itemCount: productList.length - 20,
+            itemBuilder: (context, index, realIndex) {
+              return networkImage(
+                imageUrl: productList[index].imageUrl,
+              );
+            },
+            options: CarouselOptions(
+              enlargeCenterPage: true,
+              autoPlay: true,
+              autoPlayCurve: Curves.easeInCubic,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+            ),
+          ),
         ],
       ),
     );
@@ -651,7 +756,6 @@ class ProductGrideView extends StatelessWidget {
   }) : super(key: key);
 
   final List<ProductEntity> productList;
-
   final UiDuplicate uiDuplicate;
   final CustomColors colors;
   final CustomTextStyle textStyle;
@@ -666,13 +770,19 @@ class ProductGrideView extends StatelessWidget {
         itemCount: productList.length,
         physics: uiDuplicate.defaultScroll,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, crossAxisSpacing: 15, mainAxisSpacing: 15),
+          crossAxisCount: 2,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
+        ),
         itemBuilder: (context, index) {
           return Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: colors.captionColor,
-                borderRadius: BorderRadius.circular(15)),
+              color: colors.captionColor,
+              borderRadius: BorderRadius.circular(
+                15,
+              ),
+            ),
             child: ShopProductView(
               product: productList[index],
               textStyle: textStyle,
@@ -685,15 +795,26 @@ class ProductGrideView extends StatelessWidget {
   }
 }
 
-Widget gridViewScreensContainer(
-    {required Widget child, required CustomColors colors}) {
+Widget gridViewScreensContainer({
+  required Widget child,
+  required CustomColors colors,
+}) {
   return Container(
     alignment: Alignment.center,
-    margin: const EdgeInsets.only(top: 30),
-    padding: const EdgeInsets.all(15),
+    margin: const EdgeInsets.only(
+      top: 30,
+    ),
+    padding: const EdgeInsets.all(
+      15,
+    ),
     decoration: BoxDecoration(
-        color: colors.whiteColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(15))),
+      color: colors.whiteColor,
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(
+          15,
+        ),
+      ),
+    ),
     child: child,
   );
 }
@@ -723,33 +844,37 @@ class EmptyScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           title,
-          style: textStyle.titleLarge.copyWith(color: colors.whiteColor),
+          style: textStyle.titleLarge.copyWith(
+            color: colors.whiteColor,
+          ),
         ),
       ),
       body: duplicateContainer(
-          colors: colors,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LottieBuilder.network(
-                lottieName,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: Get.mediaQuery.size.width * 0.6,
-                child: Center(
-                  child: Text(
-                    content,
-                    style: textStyle.bodyNormal
-                        .copyWith(fontWeight: FontWeight.bold),
+        colors: colors,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            LottieBuilder.network(
+              lottieName,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: Get.mediaQuery.size.width * 0.6,
+              child: Center(
+                child: Text(
+                  content,
+                  style: textStyle.bodyNormal.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -777,12 +902,17 @@ class DuplicateTemplate extends StatelessWidget {
         centerTitle: true,
         title: Text(
           title,
-          style: textStyle.titleLarge.copyWith(color: colors.whiteColor),
+          style: textStyle.titleLarge.copyWith(
+            color: colors.whiteColor,
+          ),
         ),
       ),
       body: Container(
         color: colors.blackColor,
-        child: duplicateContainer(colors: colors, child: child),
+        child: duplicateContainer(
+          colors: colors,
+          child: child,
+        ),
       ),
     );
   }
@@ -799,95 +929,124 @@ Widget textField(
     bool obscureText = false,
     Widget? suffix}) {
   return Padding(
-      padding: edgeInsetsGeometry,
-      child: Theme(
-        data: ThemeData(
-            colorScheme: ColorScheme.light(
-                primary: colors.captionColor, onSurface: colors.captionColor)),
-        child: Form(
-          key: formKey,
-          child: TextFormField(
-              obscureText: obscureText,
-              keyboardType: inputType,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "this item required";
-                } else if (value.length < 4) {
-                  return "item less than 4 characters ";
-                } else {
-                  return null;
-                }
-              },
-              controller: controller,
-              cursorColor: colors.captionColor,
-              focusNode: FocusNode(),
-              decoration: InputDecoration(
-                  labelText: lable,
-                  labelStyle: textStyle.bodyNormal,
-                  suffix: suffix,
-                  floatingLabelStyle:
-                      textStyle.bodySmall.copyWith(fontWeight: FontWeight.w700),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)))),
+    padding: edgeInsetsGeometry,
+    child: Theme(
+      data: ThemeData(
+        colorScheme: ColorScheme.light(
+          primary: colors.captionColor,
+          onSurface: colors.captionColor,
         ),
-      ));
+      ),
+      child: Form(
+        key: formKey,
+        child: TextFormField(
+          obscureText: obscureText,
+          keyboardType: inputType,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "this item required";
+            } else if (value.length < 4) {
+              return "item less than 4 characters ";
+            } else {
+              return null;
+            }
+          },
+          controller: controller,
+          cursorColor: colors.captionColor,
+          focusNode: FocusNode(),
+          decoration: InputDecoration(
+            labelText: lable,
+            labelStyle: textStyle.bodyNormal,
+            suffix: suffix,
+            floatingLabelStyle: textStyle.bodySmall.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(
+                12,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }
 
-Widget addressEditButton(
-    {required GestureTapCallback callback,
-    required CustomColors colors,
-    required CustomTextStyle textStyle}) {
+Widget addressEditButton({
+  required GestureTapCallback callback,
+  required CustomColors colors,
+  required CustomTextStyle textStyle,
+}) {
   return CupertinoButton(
-      onPressed: callback,
-      child: Icon(
-        CupertinoIcons.pencil,
-        color: colors.blackColor,
-        size: 24,
-      ));
+    onPressed: callback,
+    child: Icon(
+      CupertinoIcons.pencil,
+      color: colors.blackColor,
+      size: 24,
+    ),
+  );
 }
 
-void addAddressBottomSheet(
-    {required CustomTextStyle textStyle,
-    required CustomColors colors,
-    required ScrollPhysics scrollPhysics,
-    required GestureTapCallback osSaveClicked,
-    required TextEditingController adNameController,
-    required GlobalKey<FormState> adNameKey,
-    required TextEditingController stateController,
-    required GlobalKey<FormState> stateKey,
-    required TextEditingController addressController,
-    required GlobalKey<FormState> addressKey,
-    required TextEditingController postalController,
-    required GlobalKey<FormState> postalKey,
-    required Widget dropDown}) {
+void addAddressBottomSheet({
+  required CustomTextStyle textStyle,
+  required CustomColors colors,
+  required ScrollPhysics scrollPhysics,
+  required GestureTapCallback osSaveClicked,
+  required TextEditingController adNameController,
+  required GlobalKey<FormState> adNameKey,
+  required TextEditingController stateController,
+  required GlobalKey<FormState> stateKey,
+  required TextEditingController addressController,
+  required GlobalKey<FormState> addressKey,
+  required TextEditingController postalController,
+  required GlobalKey<FormState> postalKey,
+  required Widget dropDown,
+}) {
   showModalBottomSheet(
     isScrollControlled: true,
     shape: const OutlineInputBorder(
       borderSide: BorderSide.none,
-      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(
+          15,
+        ),
+      ),
     ),
     context: Get.context!,
     builder: (context) {
       return Container(
         height: Get.size.height * 0.8,
-        padding: const EdgeInsets.fromLTRB(15, 4, 15, 15),
+        padding: const EdgeInsets.fromLTRB(
+          15,
+          4,
+          15,
+          15,
+        ),
         decoration: BoxDecoration(
-            color: colors.whiteColor,
-            borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(15))),
+          color: colors.whiteColor,
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(
+              15,
+            ),
+          ),
+        ),
         child: Scaffold(
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: SizedBox(
-              width: Get.size.width * 0.5,
-              child: FloatingActionButton.extended(
-                  backgroundColor: colors.primary,
-                  onPressed: osSaveClicked,
-                  label: Text(
-                    "Save",
-                    style:
-                        textStyle.bodyNormal.copyWith(color: colors.whiteColor),
-                  ))),
+            width: Get.size.width * 0.5,
+            child: FloatingActionButton.extended(
+              backgroundColor: colors.primary,
+              onPressed: osSaveClicked,
+              label: Text(
+                "Save",
+                style: textStyle.bodyNormal.copyWith(
+                  color: colors.whiteColor,
+                ),
+              ),
+            ),
+          ),
           body: SingleChildScrollView(
             physics: scrollPhysics,
             child: Column(
@@ -897,8 +1056,11 @@ void addAddressBottomSheet(
                     width: 40,
                     height: 7,
                     decoration: BoxDecoration(
-                        color: colors.captionColor,
-                        borderRadius: BorderRadius.circular(3)),
+                      color: colors.captionColor,
+                      borderRadius: BorderRadius.circular(
+                        3,
+                      ),
+                    ),
                   ),
                   onPressed: () {
                     Get.back();
@@ -913,37 +1075,49 @@ void addAddressBottomSheet(
                       children: [
                         dropDown,
                         textField(
-                            inputType: TextInputType.streetAddress,
-                            textStyle: textStyle,
-                            controller: stateController,
-                            formKey: stateKey,
-                            lable: "State",
-                            colors: colors,
-                            edgeInsetsGeometry: const EdgeInsets.all(12)),
+                          inputType: TextInputType.streetAddress,
+                          textStyle: textStyle,
+                          controller: stateController,
+                          formKey: stateKey,
+                          lable: "State",
+                          colors: colors,
+                          edgeInsetsGeometry: const EdgeInsets.all(
+                            12,
+                          ),
+                        ),
                         textField(
-                            inputType: TextInputType.streetAddress,
-                            textStyle: textStyle,
-                            controller: addressController,
-                            formKey: addressKey,
-                            lable: "Address detail",
-                            colors: colors,
-                            edgeInsetsGeometry: const EdgeInsets.all(12)),
+                          inputType: TextInputType.streetAddress,
+                          textStyle: textStyle,
+                          controller: addressController,
+                          formKey: addressKey,
+                          lable: "Address detail",
+                          colors: colors,
+                          edgeInsetsGeometry: const EdgeInsets.all(
+                            12,
+                          ),
+                        ),
                         textField(
-                            inputType: TextInputType.streetAddress,
-                            textStyle: textStyle,
-                            controller: adNameController,
-                            formKey: adNameKey,
-                            lable: "Address name",
-                            colors: colors,
-                            edgeInsetsGeometry: const EdgeInsets.all(12)),
+                          inputType: TextInputType.streetAddress,
+                          textStyle: textStyle,
+                          controller: adNameController,
+                          formKey: adNameKey,
+                          lable: "Address name",
+                          colors: colors,
+                          edgeInsetsGeometry: const EdgeInsets.all(
+                            12,
+                          ),
+                        ),
                         textField(
-                            textStyle: textStyle,
-                            controller: postalController,
-                            formKey: postalKey,
-                            lable: "Postal code",
-                            colors: colors,
-                            edgeInsetsGeometry: const EdgeInsets.all(12),
-                            inputType: TextInputType.number),
+                          textStyle: textStyle,
+                          controller: postalController,
+                          formKey: postalKey,
+                          lable: "Postal code",
+                          colors: colors,
+                          edgeInsetsGeometry: const EdgeInsets.all(
+                            12,
+                          ),
+                          inputType: TextInputType.number,
+                        ),
                       ],
                     ),
                   ),
@@ -958,51 +1132,61 @@ void addAddressBottomSheet(
 }
 
 BoxDecoration dropDownDecoration() {
-  return BoxDecoration(borderRadius: BorderRadius.circular(15));
+  return BoxDecoration(
+    borderRadius: BorderRadius.circular(
+      15,
+    ),
+  );
 }
 
-void loginRequiredDialog({required CustomTextStyle textStyle}) {
+void loginRequiredDialog({
+  required CustomTextStyle textStyle,
+}) {
   showCupertinoDialog(
-      context: Get.context!,
-      builder: (context) => CupertinoAlertDialog(
-            title: Text(
-              "Login",
-              style: textStyle.titleLarge,
-            ),
-            content: Column(
-              children: [
-                LottieBuilder.network(
-                  loginLottie,
-                  width: 200,
-                  height: 200,
-                ),
-                Text(
-                  "To continue to payment please login",
-                  style: textStyle.bodyNormal,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.start,
-                ),
-              ],
-            ),
-            actions: [
-              CupertinoButton(
-                child: Text(
-                  "Cancel",
-                  style: textStyle.bodyNormal,
-                ),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
-              CupertinoButton(
-                  onPressed: () {
-                    Get.back();
-                    Get.to(const AuthenticationScreen());
-                  },
-                  child: Text(
-                    "Login",
-                    style: textStyle.bodyNormal,
-                  )),
-            ],
-          ));
+    context: Get.context!,
+    builder: (context) => CupertinoAlertDialog(
+      title: Text(
+        "Login",
+        style: textStyle.titleLarge,
+      ),
+      content: Column(
+        children: [
+          LottieBuilder.network(
+            loginLottie,
+            width: 200,
+            height: 200,
+          ),
+          Text(
+            "To continue to payment please login",
+            style: textStyle.bodyNormal,
+            overflow: TextOverflow.clip,
+            textAlign: TextAlign.start,
+          ),
+        ],
+      ),
+      actions: [
+        CupertinoButton(
+          child: Text(
+            "Cancel",
+            style: textStyle.bodyNormal,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        CupertinoButton(
+          onPressed: () {
+            Get.back();
+            Get.to(
+              const AuthenticationScreen(),
+            );
+          },
+          child: Text(
+            "Login",
+            style: textStyle.bodyNormal,
+          ),
+        ),
+      ],
+    ),
+  );
 }

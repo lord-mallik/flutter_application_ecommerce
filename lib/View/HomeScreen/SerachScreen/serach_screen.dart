@@ -24,6 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final duplicateController = Get.find<DuplicateController>();
   late CustomColors colors = duplicateController.colors;
   late CustomTextStyle textStyle = duplicateController.textStyle;
+
   @override
   void dispose() {
     searchBloc?.close();
@@ -108,10 +109,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 body: gridViewScreensContainer(
                     colors: colors,
                     child: ProductGrideView(
-                        productList: state.productList,
-                        uiDuplicate: duplicateController.uiDuplicate,
-                        colors: colors,
-                        textStyle: textStyle)),
+                      productList: state.productList,
+                      uiDuplicate: duplicateController.uiDuplicate,
+                      colors: colors,
+                      textStyle: textStyle,
+                    )),
               );
             } else if (state is SearchEmptyScreen) {
               return EmptyScreen(

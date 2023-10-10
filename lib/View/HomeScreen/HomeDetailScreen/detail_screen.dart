@@ -50,11 +50,11 @@ class _DetailScreenState extends State<DetailScreen> {
                   icon: isInFavorite
                       ? Icon(
                           CupertinoIcons.heart_fill,
-                          color: colors.blackColor,
+                          color: colors.amber,
                         )
                       : Icon(
                           CupertinoIcons.heart,
-                          color: colors.blackColor,
+                          color: colors.amber,
                         ),
                   onPressed: () async {
                     if (isInFavorite) {
@@ -250,7 +250,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         height: 20,
                       ),
                       Text(
-                        "€${widget.productEntity.price}",
+                        "₹${widget.productEntity.price}",
                         style: textStyle.titleLarge
                             .copyWith(color: colors.primary),
                       ),

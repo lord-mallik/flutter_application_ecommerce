@@ -5,7 +5,6 @@ import 'package:flutter_application_ecommerce/Model/GetX/Controller/duplicate_co
 import 'package:flutter_application_ecommerce/Model/GetX/Controller/home_controller.dart';
 import 'package:flutter_application_ecommerce/Model/GetX/Controller/profile_controller.dart';
 import 'package:flutter_application_ecommerce/Model/Tools/Color/color.dart';
-import 'package:flutter_application_ecommerce/Model/Tools/Constant/const.dart';
 import 'package:flutter_application_ecommerce/Model/Tools/Font/font.dart';
 import 'package:flutter_application_ecommerce/Model/Tools/JsonParse/product_parse.dart';
 import 'package:flutter_application_ecommerce/Model/Widget/widget.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_application_ecommerce/View/HomeScreen/SerachScreen/serac
 import 'package:flutter_application_ecommerce/View/HomeScreen/ShopScreen/shop_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/home_bloc.dart';
 
@@ -31,6 +29,9 @@ class _HomeScreenState extends State<HomeScreen>
   final duplicateController = Get.find<DuplicateController>();
   final homeController = Get.find<HomeController>();
   final getContext = Get.context!;
+
+  // final product = Get.find<ProductEntity>();
+
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -65,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen>
             return const CustomLoading();
           } else if (state is HomeSuccess) {
             final List<ProductEntity> productList = state.productList;
+
             final profileFunctions =
                 Get.find<ProfileController>().profileFunctions;
             return Scaffold(
@@ -78,45 +80,6 @@ class _HomeScreenState extends State<HomeScreen>
                   style:
                       textStyle.titleLarge.copyWith(color: colors.whiteColor),
                 ),
-               /* leading: CupertinoButton(
-                  child: Icon(
-                    Icons.menu,
-                    color: colors.whiteColor,
-                  ),
-                  onPressed: () {
-                    showMenu(
-                        color: colors.gray,
-                        context: context,
-                        position: RelativeRect.fill,
-                        items: [
-                          PopupMenuItem(
-                              child: TextButton(
-                            onPressed: () {
-                              Get.back();
-                              launchUrl(
-                                Uri.parse(developerGithub),
-                                mode: LaunchMode.externalApplication,
-                              );
-                            },
-                            child: Text(
-                              "Developer Github page",
-                              style: textStyle.bodyNormal,
-                            ),
-                          )),
-                          PopupMenuItem(
-                              child: TextButton(
-                            onPressed: () {
-                              Get.back();
-                              showLicensePage(context: context);
-                            },
-                            child: Text(
-                              "Application license",
-                              style: textStyle.bodyNormal,
-                            ),
-                          ))
-                        ]);
-                  },
-                ),*/
                 actions: [
                   CupertinoButton(
                     child: Icon(
@@ -152,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 height: 5,
                               ),
                               Text(
-                                "Find the perfect watch for your wrist",
+                                "Find the perfect product for yourself",
                                 style: textStyle.bodyNormal,
                               )
                             ],
@@ -160,24 +123,28 @@ class _HomeScreenState extends State<HomeScreen>
                         );
                       case 2:
                         return ProductListView(
-                            colors: colors,
-                            profileFunctions: profileFunctions,
-                            reverse: false,
-                            physics: physics,
-                            textStyle: textStyle,
-                            productList: productList,
-                            callback: () {
-                              Get.to(ShopScreen(
-                                  title: "Latest", productList: productList));
-                            },
-                            title: "Latest");
+                          colors: colors,
+                          profileFunctions: profileFunctions,
+                          reverse: false,
+                          physics: physics,
+                          textStyle: textStyle,
+                          productList: productList,
+                          callback: () {
+                            Get.to(ShopScreen(
+                              title: "Latest",
+                              productList: productList,
+                            ));
+                          },
+                          title: "Latest",
+                        );
 
                       case 3:
                         return BannerListView(
                             callback: () {
                               Get.to(ShopScreen(
-                                  title: "Top deals",
-                                  productList: productList));
+                                title: "Top deals",
+                                productList: productList,
+                              ));
                             },
                             produtList: productList,
                             colors: colors,
@@ -189,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen>
                             colors: colors,
                             textStyle: textStyle,
                             productList: productList.reversed.toList(),
-                            title: "Featured products",
+                            title: "Feature products",
                             physics: physics,
                             callback: () {
                               Get.to(ShopScreen(

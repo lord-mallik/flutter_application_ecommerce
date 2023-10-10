@@ -9,15 +9,14 @@ class SearchingScreen extends SearchState {}
 
 class SearchLoading extends SearchState {}
 
-class SearchError extends SearchState {
-
-}
+class SearchError extends SearchState {}
 
 class SearchSuccess extends SearchState {
   final List<ProductEntity> productList;
   List<String> getProductNames() {
     return productList.map((product) => product.name).toList();
   }
+
   SearchSuccess({required this.productList});
 }
 

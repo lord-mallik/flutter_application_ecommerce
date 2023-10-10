@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class InitialController extends GetxController {
-  final String rememberStorge = "Remember";
+  final String rememberStorage = "Remember";
 
   Future<void> closeHive() async {
     await Hive.close();
@@ -14,7 +14,7 @@ class InitialController extends GetxController {
 
   bool isRemember() {
     final GetStorage storage = GetStorage();
-    bool? status = storage.read(rememberStorge);
+    bool? status = storage.read(rememberStorage);
     if (status != null) {
       return status;
     } else {
@@ -26,19 +26,19 @@ class InitialController extends GetxController {
     Get.put(ProfileController());
     Get.put(HomeController());
 
-    final duplicateContrller = Get.find<DuplicateController>();
+    final duplicateController = Get.find<DuplicateController>();
     final profileController = Get.find<ProfileController>();
-    await duplicateContrller.cartFunctions.openCartBox();
+    await duplicateController.cartFunctions.openCartBox();
     await profileController.profileFunctions.openFavoriteBox();
     profileController.userSetImageInstance.value =
         profileController.profileFunctions.isUserSavedImage();
 
     bool remember = isRemember();
     if (remember) {
-      final perviousAccount =
+      final previousAccount =
           profileController.authenticationFunctions.getUserInformation();
-      if (perviousAccount != null) {
-        profileController.informationInstance.value = perviousAccount;
+      if (previousAccount != null) {
+        profileController.informationInstance.value = previousAccount;
         profileController.isLoginInstanse.value =
             profileController.authenticationFunctions.isUserLogin();
       }

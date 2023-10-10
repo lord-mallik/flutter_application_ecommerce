@@ -60,7 +60,8 @@ class _IntroScreenState extends State<IntroScreen> {
                 width: 40,
                 height: 30,
                 decoration: BoxDecoration(
-                    color: colors.whiteColor, borderRadius: BorderRadius.circular(12)),
+                    color: colors.whiteColor,
+                    borderRadius: BorderRadius.circular(12)),
                 child: Icon(
                   CupertinoIcons.right_chevron,
                   color: colors.blackColor,

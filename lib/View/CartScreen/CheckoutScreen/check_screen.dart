@@ -46,7 +46,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         checkoutBloc = bloc;
         bloc.add(CheckoutStart());
         subscription = bloc.stream.listen((state) {
-          if (state is CheckoutGetAddreesScreen) {
+          if (state is CheckoutGetAddressScreen) {
             final colors = state.colors;
             final adNameController = TextEditingController();
             final GlobalKey<FormState> adNameKey = GlobalKey();
@@ -79,7 +79,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   } else {
                     snackBar(
                         title: "Country",
-                        message: "Please slecet you're country",
+                        message: "Please select you're country",
                         textStyle: state.textStyle,
                         colors: colors);
                   }
@@ -126,7 +126,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       child: BlocBuilder<CheckoutBloc, CheckoutState>(
         builder: (context, state) {
           if (state is CheckoutInitialScreen) {
-            final addresList = state.addressList;
+            final addressList = state.addressList;
             final duplicateController = state.duplicateController;
             final profileController = state.profileController;
             final CustomColors colors = duplicateController.colors;
@@ -193,7 +193,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                         style: textStyle.bodyNormal.copyWith(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      addresList.isNotEmpty
+                                      addressList.isNotEmpty
                                           ? SizedBox(
                                               width: Get.width * 0.45,
                                               height: 50,
@@ -207,7 +207,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                     dropDownDecoration(),
                                                 isExpanded: true,
                                                 dropdownWidth: Get.width * 0.6,
-                                                items: addresList,
+                                                items: addressList,
                                                 onChanged: (value) {
                                                   addressDetail = value;
                                                 },

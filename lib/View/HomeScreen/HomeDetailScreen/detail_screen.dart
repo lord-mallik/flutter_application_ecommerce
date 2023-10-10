@@ -17,6 +17,7 @@ import 'package:share_plus/share_plus.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.productEntity});
+
   final ProductEntity productEntity;
 
   @override

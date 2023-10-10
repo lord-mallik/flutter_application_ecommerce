@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class UiDuplicate {
   final defaultScroll = const BouncingScrollPhysics();
 }
@@ -18,5 +17,3 @@ class UserInformation {
   UserInformation(
       {required this.userName, required this.password, required this.name});
 }
-
-

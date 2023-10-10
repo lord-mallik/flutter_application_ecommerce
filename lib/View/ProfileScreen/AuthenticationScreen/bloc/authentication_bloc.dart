@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 part 'authentication_event.dart';
+
 part 'authentication_state.dart';
 
 class AuthenticationBloc
@@ -20,8 +21,8 @@ class AuthenticationBloc
       try {
         if (event is AuthenticationStart) {
           emit(AuthenticationLoading());
-          final perviousAccount = profileFunctions.getUserInformation();
-          if (perviousAccount != null) {
+          final previousAccount = profileFunctions.getUserInformation();
+          if (previousAccount != null) {
             emit(AuthenticationLoginScreen(
                 profileController: profileController,
                 duplicateController: duplicateController));
@@ -40,13 +41,13 @@ class AuthenticationBloc
           emit(AuthenticationLoginScreen(
               profileController: profileController,
               duplicateController: duplicateController));
-        } else if (event is AuthenticatioLogin) {
+        } else if (event is AuthenticationLogin) {
           emit(AuthenticationLoading());
-          final perviousAccount = profileFunctions.getUserInformation();
-          if (perviousAccount != null) {
+          final previousAccount = profileFunctions.getUserInformation();
+          if (previousAccount != null) {
             await profileFunctions.saveRemember(remember: event.isRemember);
             bool isLogin = profileFunctions.loginUser(
-                pI: perviousAccount,
+                pI: previousAccount,
                 i: UserInformation(
                     userName: event.userName,
                     password: event.password,
@@ -84,13 +85,12 @@ class AuthenticationBloc
               duplicateController: duplicateController));
         } else if (event is AuthenticationSaveChanges) {
           emit(AuthenticationLoading());
-          final bool isCommpleted =
-              await profileFunctions.updateUserInformation(
-                  i: UserInformation(
-                      userName: event.userName,
-                      password: event.password,
-                      name: ""));
-          if (isCommpleted) {
+          final bool isCompleted = await profileFunctions.updateUserInformation(
+              i: UserInformation(
+                  userName: event.userName,
+                  password: event.password,
+                  name: ""));
+          if (isCompleted) {
             emit(AuthenticationLoginScreen(
                 profileController: profileController,
                 duplicateController: duplicateController));

@@ -21,10 +21,10 @@ class ProductEntity {
       this.description);
 
   ProductEntity.fromJson(Map<String, dynamic> json)
-      : id = json['id']??0,
-        name = json['name']??"",
-        price = json['price']??"",
-        imageUrl = json['image_link']??"",
-        productType = json['product_type']??"",
-        description = json['description']??"";
+      : id = json['id'] ?? 0,
+        name = json['name'] ?? "",
+        price = json['price'] ?? "",
+        imageUrl = json['image_link'] ?? "",
+        productType = json['product_type'] ?? "",
+        description = json['description'] ?? "";
 }

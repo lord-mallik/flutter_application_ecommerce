@@ -577,12 +577,12 @@ class ProductListView extends StatelessWidget {
 class BannerListView extends StatelessWidget {
   const BannerListView(
       {super.key,
-      required this.produtList,
+      required this.productList,
       required this.colors,
       required this.textStyle,
       required this.callback});
 
-  final List<ProductEntity> produtList;
+  final List<ProductEntity> productList;
   final CustomColors colors;
   final CustomTextStyle textStyle;
   final GestureTapCallback callback;
@@ -623,10 +623,10 @@ class BannerListView extends StatelessWidget {
             height: 10,
           ),
           CarouselSlider.builder(
-              itemCount: produtList.length - 20,
+              itemCount: productList.length - 20,
               itemBuilder: (context, index, realIndex) {
                 return networkImage(
-                  imageUrl: produtList[index].imageUrl,
+                  imageUrl: productList[index].imageUrl,
                 );
               },
               options: CarouselOptions(

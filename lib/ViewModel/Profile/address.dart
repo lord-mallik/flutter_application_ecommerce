@@ -22,6 +22,7 @@ class AddressFunctions {
     "Finland",
     "France",
     "Hong Kong",
+    "Nepal",
     "Hungary",
     "Iceland",
     "India",
@@ -105,15 +106,13 @@ class AddressFunctions {
     for (var element in addressList) {
       popupMenuList.add(
         DropdownMenuItem(
-         
           value: element.addressDetail,
           child: Text(
             element.addressName,
             style: textStyle.bodyNormal,
           ),
         ),
-          
-          );
+      );
     }
     return popupMenuList;
   }

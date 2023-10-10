@@ -48,14 +48,14 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           if (state is SignSuccess) {
             snackBar(
                 title: "sign",
-                message: "sign in successfull",
+                message: "sign in successful",
                 textStyle: textStyle,
                 colors: colors);
             Navigator.pop(context);
           } else if (state is LoginSuccess) {
             snackBar(
                 title: "sign",
-                message: "sign in successfull",
+                message: "sign in successfully",
                 textStyle: textStyle,
                 colors: colors);
             Navigator.pop(context);
@@ -217,7 +217,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                               textStyle: textStyle,
                               controller: userNameController,
                               formKey: userNameKey,
-                              lable: "UserName or Email"),
+                              lable: "Email"),
                           Obx(
                             () => textField(
                                 suffix: CupertinoButton(
@@ -268,7 +268,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 ),
                                 CupertinoButton(
                                   child: Text(
-                                    "Forgat password?",
+                                    "Forgot password?",
                                     style: textStyle.bodyNormal,
                                   ),
                                   onPressed: () {
@@ -383,7 +383,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 textStyle: textStyle,
                                 controller: userNameController,
                                 formKey: userNameKey,
-                                lable: "UserName or Email"),
+                                lable: "Email"),
                             Obx(
                               () => textField(
                                   suffix: CupertinoButton(

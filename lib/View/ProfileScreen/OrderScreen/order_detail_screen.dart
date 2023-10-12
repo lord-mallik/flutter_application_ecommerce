@@ -1,9 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_application_ecommerce/Model/GetX/Controller/duplicate_controller.dart';
 import 'package:flutter_application_ecommerce/Model/Tools/JsonParse/product_parse.dart';
 import 'package:flutter_application_ecommerce/Model/Widget/widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+
+import '../../HomeScreen/HomeDetailScreen/detail_screen.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   const OrderDetailScreen({
@@ -12,12 +14,12 @@ class OrderDetailScreen extends StatelessWidget {
   });
 
   final List<ProductEntity> productList;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final duplicateController = Get.find<DuplicateController>();
     final colors = duplicateController.colors;
     final textStyle = duplicateController.textStyle;
-
     return DuplicateTemplate(
       colors: colors,
       textStyle: textStyle,
@@ -56,37 +58,46 @@ class OrderDetailScreen extends StatelessWidget {
                       15,
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(
+                        DetailScreen(
+                          productEntity: product,
                         ),
-                        width: 130,
-                        child: networkImage(
-                          imageUrl: product.imageUrl,
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                            top: 10,
+                            bottom: 10,
+                          ),
+                          width: 130,
+                          child: networkImage(
+                            imageUrl: product.imageUrl,
+                          ),
                         ),
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            product.name,
-                            style: textStyle.bodyNormal,
-                            maxLines: 1,
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "₹ ${product.price}",
-                            style: textStyle.bodyNormal,
-                          ),
-                        ],
-                      ),
-                    ],
+                        Column(
+                          children: [
+                            Text(
+                              product.name,
+                              style: textStyle.bodyNormal,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "₹ ${product.price}",
+                              style: textStyle.bodyNormal,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

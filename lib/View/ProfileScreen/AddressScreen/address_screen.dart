@@ -92,6 +92,7 @@ class _AddressScreenState extends State<AddressScreen> {
               onChanged: (value) {
                 country = value;
               },
+              searchInnerWidgetHeight: Get.size.height * 0.4,
               searchController: searchController,
               searchInnerWidget: Padding(
                 padding: const EdgeInsets.all(12),
@@ -460,7 +461,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         0,
                       ),
                       child: AutoSizeText(
-                        "your address list is empty try to add new one",
+                        "Your address list is empty try to add new one",
                         style: textStyle.bodyNormal.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

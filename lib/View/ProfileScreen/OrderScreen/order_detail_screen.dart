@@ -81,7 +81,7 @@ class OrderDetailScreen extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            "₹${product.price}",
+                            "₹ ${product.price}",
                             style: textStyle.bodyNormal,
                           ),
                         ],

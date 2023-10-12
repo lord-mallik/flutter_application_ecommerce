@@ -118,6 +118,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   "select country",
                   style: state.textStyle.bodyNormal,
                 ),
+                searchInnerWidgetHeight: Get.size.height * 0.4,
                 dropdownMaxHeight: Get.size.height * 0.4,
                 dropdownDecoration: dropDownDecoration(),
                 onChanged: (value) {

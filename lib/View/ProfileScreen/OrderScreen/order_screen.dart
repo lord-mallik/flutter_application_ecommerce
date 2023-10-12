@@ -41,7 +41,7 @@ class _OrderScreenState extends State<OrderScreen> {
             return DuplicateTemplate(
               colors: colors,
               textStyle: textStyle,
-              title: "Order history",
+              title: "Order History",
               child: ListView.builder(
                 physics: duplicateController.uiDuplicate.defaultScroll,
                 itemCount: state.orderHistoryList.length,
@@ -106,7 +106,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           ),
                         ),
                         orderHistoryItem(
-                          rightTitle: order.totalPrice,
+                          rightTitle: "₹ ${order.totalPrice}",
                           leftTitle: "Amount :",
                           leftStyle: textStyle.bodyNormal,
                           rightStyle: textStyle.bodyNormal.copyWith(

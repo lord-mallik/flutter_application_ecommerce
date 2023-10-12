@@ -303,7 +303,7 @@ class ShopProductView extends StatelessWidget {
               height: 5,
             ),
             Text(
-              "₹${product.price}",
+              "₹ ${product.price}",
               style: textStyle.bodyNormal.copyWith(
                 color: colors.blackColor,
               ),

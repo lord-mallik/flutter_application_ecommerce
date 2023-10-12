@@ -129,7 +129,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 onPressed: () {
                   Share.shareWithResult(
-                    "https://github.com/EmirBashiri",
+                    "https://github.com/priyanka-patel",
                     subject: "Developer github profile",
                   );
                 },

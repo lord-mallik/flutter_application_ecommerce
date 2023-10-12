@@ -77,12 +77,12 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     shape: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(
-                        15,
+                        25,
                       ),
                     ),
                     title: Container(
                       alignment: Alignment.center,
-                      height: 50,
+                      height: 60,
                       decoration: BoxDecoration(
                         color: colors.blackColor,
                         borderRadius: const BorderRadius.vertical(
@@ -91,10 +91,27 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                           ),
                         ),
                       ),
-                      child: Text(
-                        "Change password",
-                        style: textStyle.titleLarge.copyWith(
-                          color: colors.whiteColor,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Change Password",
+                              style: textStyle.titleLarge.copyWith(
+                                color: colors.whiteColor,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(5,),
+                                color: colors.whiteColor,),
+
+                                child: const Icon(Icons.clear,),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -114,7 +131,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 textStyle: textStyle,
                                 controller: userNameController,
                                 formKey: userNameKey,
-                                lable: "user name",
+                                lable: "Username",
                                 colors: colors,
                                 edgeInsetsGeometry: const EdgeInsets.all(
                                   5,
@@ -170,6 +187,12 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 );
               },
             );
+          } else if (state is isTextFeildEmpty) {
+            snackBar(
+                title: "Error",
+                message: "Fill the TextField",
+                textStyle: textStyle,
+                colors: colors);
           } else if (state is UserHaveNoAccount) {
             snackBar(
                 title: "Account",

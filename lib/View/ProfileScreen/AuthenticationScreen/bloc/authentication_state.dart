@@ -33,6 +33,9 @@ class LoginSuccess extends AuthenticationState {}
 
 class UserHaveNoAccount extends AuthenticationState {}
 
+class isTextFeildEmpty extends AuthenticationState {}
+
+
 class SignSuccess extends AuthenticationState {}
 
 class LoginUnSuccess extends AuthenticationState {}

@@ -16,7 +16,9 @@ import 'package:get/get.dart';
 import 'bloc/home_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key,});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,8 +34,11 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: duplicateController.colors.whiteColor,),);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: duplicateController.colors.whiteColor,
+      ),
+    );
     super.initState();
   }
 
@@ -49,8 +54,12 @@ class _HomeScreenState extends State<HomeScreen>
 
     return BlocProvider(
       create: (context) {
-        final bloc = HomeBloc(homeRepository: homeController.homeRepository,);
-        bloc.add(HomeStart(),);
+        final bloc = HomeBloc(
+          homeRepository: homeController.homeRepository,
+        );
+        bloc.add(
+          HomeStart(),
+        );
         homeBloc = bloc;
         return bloc;
       },
@@ -75,8 +84,9 @@ class _HomeScreenState extends State<HomeScreen>
                 centerTitle: true,
                 title: Text(
                   "Store",
-                  style:
-                      textStyle.titleLarge.copyWith(color: colors.whiteColor,),
+                  style: textStyle.titleLarge.copyWith(
+                    color: colors.whiteColor,
+                  ),
                 ),
                 actions: [
                   CupertinoButton(
@@ -85,7 +95,9 @@ class _HomeScreenState extends State<HomeScreen>
                       color: colors.whiteColor,
                     ),
                     onPressed: () {
-                      Get.to(const SearchScreen(),);
+                      Get.to(
+                        const SearchScreen(),
+                      );
                     },
                   ),
                 ],
@@ -99,7 +111,10 @@ class _HomeScreenState extends State<HomeScreen>
                     switch (index) {
                       case 1:
                         return Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10,),
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            bottom: 10,
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -128,40 +143,49 @@ class _HomeScreenState extends State<HomeScreen>
                           textStyle: textStyle,
                           productList: productList,
                           callback: () {
-                            Get.to(ShopScreen(
-                              title: "Latest",
-                              productList: productList,
-                            ),);
+                            Get.to(
+                              ShopScreen(
+                                title: "Latest",
+                                productList: productList,
+                              ),
+                            );
                           },
                           title: "Latest",
                         );
 
                       case 3:
                         return BannerListView(
-                            callback: () {
-                              Get.to(ShopScreen(
+                          callback: () {
+                            Get.to(
+                              ShopScreen(
                                 title: "Top deals",
                                 productList: productList,
-                              ),);
-                            },
-                            productList: productList,
-                            colors: colors,
-                            textStyle: textStyle,);
+                              ),
+                            );
+                          },
+                          productList: productList,
+                          colors: colors,
+                          textStyle: textStyle,
+                        );
 
                       case 4:
                         return ProductListView(
-                            profileFunctions: profileFunctions,
-                            colors: colors,
-                            textStyle: textStyle,
-                            productList: productList.reversed.toList(),
-                            title: "Feature products",
-                            physics: physics,
-                            callback: () {
-                              Get.to(ShopScreen(
-                                  title: "Featured products",
-                                  productList: productList.reversed.toList(),),);
-                            },
-                            reverse: false,);
+                          profileFunctions: profileFunctions,
+                          colors: colors,
+                          textStyle: textStyle,
+                          productList: productList.reversed.toList(),
+                          title: "Feature products",
+                          physics: physics,
+                          callback: () {
+                            Get.to(
+                              ShopScreen(
+                                title: "Featured products",
+                                productList: productList.reversed.toList(),
+                              ),
+                            );
+                          },
+                          reverse: false,
+                        );
                       default:
                         return Container();
                     }
@@ -172,7 +196,9 @@ class _HomeScreenState extends State<HomeScreen>
           } else if (state is HomeError) {
             return AppException(
               callback: () {
-                homeBloc!.add(HomeStart(),);
+                homeBloc!.add(
+                  HomeStart(),
+                );
               },
             );
           }

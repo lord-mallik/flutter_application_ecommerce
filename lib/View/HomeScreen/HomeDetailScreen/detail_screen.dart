@@ -148,15 +148,18 @@ class _DetailScreenState extends State<DetailScreen> {
           style: textStyle.titleLarge,
         ),
         actions: [
-          CartLengthBadge(
-            duplicateController: duplicateController,
-            colors: colors,
-            textStyle: textStyle,
-            badgeCallback: () {
-              Get.to(
-                const CartScreen(),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: CartLengthBadge(
+              duplicateController: duplicateController,
+              colors: colors,
+              textStyle: textStyle,
+              badgeCallback: () {
+                Get.to(
+                  const CartScreen(),
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -282,7 +285,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       height: 20,
                     ),
                     Text(
-                      "₹${widget.productEntity.price}",
+                      "₹ ${widget.productEntity.price}",
                       style: textStyle.titleLarge.copyWith(
                         color: colors.primary,
                       ),

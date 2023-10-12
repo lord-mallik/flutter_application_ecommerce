@@ -119,7 +119,7 @@ class _CartScreenState extends State<CartScreen> {
                         SizedBox(
                           width: 200,
                           child: AutoSizeText(
-                            "₹$totalPrice",
+                            "₹ $totalPrice",
                             style: textStyle.titleLarge.copyWith(
                               fontSize: 20,
                             ),

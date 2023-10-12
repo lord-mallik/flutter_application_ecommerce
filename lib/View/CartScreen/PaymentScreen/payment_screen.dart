@@ -258,7 +258,7 @@ class PaymentScreen extends StatelessWidget {
                         style: textStyle.bodyNormal,
                       ),
                       suffix: Text(
-                        "₹$totalPrice",
+                        "₹ $totalPrice",
                         style: textStyle.bodyNormal.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
